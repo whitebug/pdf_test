@@ -1,8 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pdf_test/core/core.dart';
+import 'package:pdf_test/features/preview/preview.dart';
 import 'package:pdf_test/ui_assets/assets.gen.dart';
 
 /// App bar
@@ -10,6 +12,7 @@ class PreviewAppBar extends StatelessWidget {
   /// Init
   const PreviewAppBar({
     required this.fileName,
+    this.path,
     this.currentPage,
     this.overallPages,
     super.key,
@@ -17,6 +20,9 @@ class PreviewAppBar extends StatelessWidget {
 
   /// Name
   final String fileName;
+
+  /// File path
+  final String? path;
 
   /// Current
   final int? currentPage;
@@ -73,7 +79,9 @@ class PreviewAppBar extends StatelessWidget {
           ),
           const Spacer(),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              context.read<PreviewCubit>().sharePdf(path);
+            },
             child: Row(
               children: [
                 Text(

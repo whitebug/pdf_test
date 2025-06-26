@@ -27,6 +27,7 @@ dependencies:
   pdf_render: ^1.4.12
   pdf_thumbnail: ^0.1.6+1
   pro_image_editor: ^9.13.0
+  share_plus: ^11.0.0
   syncfusion_flutter_pdf: ^30.1.37
 
 dev_dependencies:

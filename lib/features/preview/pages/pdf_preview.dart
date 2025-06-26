@@ -119,6 +119,7 @@ class _PdfPreviewState extends State<PdfPreview> {
                 left: 0,
                 right: 0,
                 child: PreviewAppBar(
+                  path: widget.path,
                   fileName: fileName,
                   currentPage: currentPage,
                   overallPages: overallPages,

@@ -11,6 +11,7 @@ import 'package:injectable/injectable.dart';
 import 'package:pdf_render/pdf_render.dart';
 import 'package:pdf_test/core/router.dart';
 import 'package:pdf_test/features/home/home_cubit/home_cubit.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart' as sfp;
 
 part 'preview_cubit.freezed.dart';
@@ -125,5 +126,14 @@ class PreviewCubit extends Cubit<PreviewState> {
         ),
       );
     }
+  }
+
+  /// Sharing
+  void sharePdf(String? pdfPath) {
+    if (pdfPath == null) {
+      return;
+    }
+    final params = ShareParams(files: [XFile(pdfPath)]);
+    SharePlus.instance.share(params);
   }
 }
