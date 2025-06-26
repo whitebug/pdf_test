@@ -12,7 +12,8 @@ import 'package:pdf_test/core/core.dart';
 part 'home_cubit.freezed.dart';
 part 'home_state.dart';
 
-const int _pagesToScan = 5;
+/// How much pages to scan
+const int pagesToScan = 5;
 
 /// Home logic
 @injectable
@@ -50,7 +51,7 @@ class HomeCubit extends Cubit<HomeState> {
     dynamic scannedDocuments;
     try {
       scannedDocuments = await FlutterDocScanner().getScannedDocumentAsPdf(
-        page: _pagesToScan,
+        page: pagesToScan,
       );
       if (scannedDocuments == null) {
         emit(
@@ -59,10 +60,6 @@ class HomeCubit extends Cubit<HomeState> {
             isLoading: false,
           ),
         );
-      }
-      if (scannedDocuments == null) {
-        emit(state.copyWith(isLoading: false));
-        return;
       }
       final filePath = scannedDocuments as String;
       final fileName = basename(filePath);

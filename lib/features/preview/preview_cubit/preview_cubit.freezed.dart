@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$PreviewState {
 
- int get currentPage; int get overallPages; bool get isReady; Uint8List? get imageBytes;
+ int get currentPage; int get overallPages; bool get isReady; bool get isLoading; Uint8List? get imageBytes; String? get error;
 /// Create a copy of PreviewState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -26,16 +26,16 @@ $PreviewStateCopyWith<PreviewState> get copyWith => _$PreviewStateCopyWithImpl<P
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PreviewState&&(identical(other.currentPage, currentPage) || other.currentPage == currentPage)&&(identical(other.overallPages, overallPages) || other.overallPages == overallPages)&&(identical(other.isReady, isReady) || other.isReady == isReady)&&const DeepCollectionEquality().equals(other.imageBytes, imageBytes));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PreviewState&&(identical(other.currentPage, currentPage) || other.currentPage == currentPage)&&(identical(other.overallPages, overallPages) || other.overallPages == overallPages)&&(identical(other.isReady, isReady) || other.isReady == isReady)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&const DeepCollectionEquality().equals(other.imageBytes, imageBytes)&&(identical(other.error, error) || other.error == error));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,currentPage,overallPages,isReady,const DeepCollectionEquality().hash(imageBytes));
+int get hashCode => Object.hash(runtimeType,currentPage,overallPages,isReady,isLoading,const DeepCollectionEquality().hash(imageBytes),error);
 
 @override
 String toString() {
-  return 'PreviewState(currentPage: $currentPage, overallPages: $overallPages, isReady: $isReady, imageBytes: $imageBytes)';
+  return 'PreviewState(currentPage: $currentPage, overallPages: $overallPages, isReady: $isReady, isLoading: $isLoading, imageBytes: $imageBytes, error: $error)';
 }
 
 
@@ -46,7 +46,7 @@ abstract mixin class $PreviewStateCopyWith<$Res>  {
   factory $PreviewStateCopyWith(PreviewState value, $Res Function(PreviewState) _then) = _$PreviewStateCopyWithImpl;
 @useResult
 $Res call({
- int currentPage, int overallPages, bool isReady, Uint8List? imageBytes
+ int currentPage, int overallPages, bool isReady, bool isLoading, Uint8List? imageBytes, String? error
 });
 
 
@@ -63,13 +63,15 @@ class _$PreviewStateCopyWithImpl<$Res>
 
 /// Create a copy of PreviewState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? currentPage = null,Object? overallPages = null,Object? isReady = null,Object? imageBytes = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? currentPage = null,Object? overallPages = null,Object? isReady = null,Object? isLoading = null,Object? imageBytes = freezed,Object? error = freezed,}) {
   return _then(_self.copyWith(
 currentPage: null == currentPage ? _self.currentPage : currentPage // ignore: cast_nullable_to_non_nullable
 as int,overallPages: null == overallPages ? _self.overallPages : overallPages // ignore: cast_nullable_to_non_nullable
 as int,isReady: null == isReady ? _self.isReady : isReady // ignore: cast_nullable_to_non_nullable
+as bool,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,imageBytes: freezed == imageBytes ? _self.imageBytes : imageBytes // ignore: cast_nullable_to_non_nullable
-as Uint8List?,
+as Uint8List?,error: freezed == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -80,13 +82,15 @@ as Uint8List?,
 
 
 class _State implements PreviewState {
-  const _State({this.currentPage = 0, this.overallPages = 1, this.isReady = false, this.imageBytes});
+  const _State({this.currentPage = 0, this.overallPages = 1, this.isReady = false, this.isLoading = false, this.imageBytes, this.error});
   
 
 @override@JsonKey() final  int currentPage;
 @override@JsonKey() final  int overallPages;
 @override@JsonKey() final  bool isReady;
+@override@JsonKey() final  bool isLoading;
 @override final  Uint8List? imageBytes;
+@override final  String? error;
 
 /// Create a copy of PreviewState
 /// with the given fields replaced by the non-null parameter values.
@@ -98,16 +102,16 @@ _$StateCopyWith<_State> get copyWith => __$StateCopyWithImpl<_State>(this, _$ide
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _State&&(identical(other.currentPage, currentPage) || other.currentPage == currentPage)&&(identical(other.overallPages, overallPages) || other.overallPages == overallPages)&&(identical(other.isReady, isReady) || other.isReady == isReady)&&const DeepCollectionEquality().equals(other.imageBytes, imageBytes));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _State&&(identical(other.currentPage, currentPage) || other.currentPage == currentPage)&&(identical(other.overallPages, overallPages) || other.overallPages == overallPages)&&(identical(other.isReady, isReady) || other.isReady == isReady)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&const DeepCollectionEquality().equals(other.imageBytes, imageBytes)&&(identical(other.error, error) || other.error == error));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,currentPage,overallPages,isReady,const DeepCollectionEquality().hash(imageBytes));
+int get hashCode => Object.hash(runtimeType,currentPage,overallPages,isReady,isLoading,const DeepCollectionEquality().hash(imageBytes),error);
 
 @override
 String toString() {
-  return 'PreviewState.state(currentPage: $currentPage, overallPages: $overallPages, isReady: $isReady, imageBytes: $imageBytes)';
+  return 'PreviewState.state(currentPage: $currentPage, overallPages: $overallPages, isReady: $isReady, isLoading: $isLoading, imageBytes: $imageBytes, error: $error)';
 }
 
 
@@ -118,7 +122,7 @@ abstract mixin class _$StateCopyWith<$Res> implements $PreviewStateCopyWith<$Res
   factory _$StateCopyWith(_State value, $Res Function(_State) _then) = __$StateCopyWithImpl;
 @override @useResult
 $Res call({
- int currentPage, int overallPages, bool isReady, Uint8List? imageBytes
+ int currentPage, int overallPages, bool isReady, bool isLoading, Uint8List? imageBytes, String? error
 });
 
 
@@ -135,13 +139,15 @@ class __$StateCopyWithImpl<$Res>
 
 /// Create a copy of PreviewState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? currentPage = null,Object? overallPages = null,Object? isReady = null,Object? imageBytes = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? currentPage = null,Object? overallPages = null,Object? isReady = null,Object? isLoading = null,Object? imageBytes = freezed,Object? error = freezed,}) {
   return _then(_State(
 currentPage: null == currentPage ? _self.currentPage : currentPage // ignore: cast_nullable_to_non_nullable
 as int,overallPages: null == overallPages ? _self.overallPages : overallPages // ignore: cast_nullable_to_non_nullable
 as int,isReady: null == isReady ? _self.isReady : isReady // ignore: cast_nullable_to_non_nullable
+as bool,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,imageBytes: freezed == imageBytes ? _self.imageBytes : imageBytes // ignore: cast_nullable_to_non_nullable
-as Uint8List?,
+as Uint8List?,error: freezed == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 

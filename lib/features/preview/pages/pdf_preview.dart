@@ -130,12 +130,16 @@ class _PdfPreviewState extends State<PdfPreview> {
                 right: 0,
                 child: PreviewActionBar(
                   onEdit: () async {
-                    await context.read<PreviewCubit>().renderPageAsImage(
+                    await context.read<PreviewCubit>().editPdf(
                       widget.path!,
                       currentPage ?? 1,
                     );
                   },
-                  onAdd: () {},
+                  onAdd: () async {
+                    await context.read<PreviewCubit>().addPages(
+                      pdfPath: widget.path!,
+                    );
+                  },
                 ),
               ),
               if (widget.path != null)
@@ -154,6 +158,15 @@ class _PdfPreviewState extends State<PdfPreview> {
                             alpha: 0.5,
                           ),
                           height: 80.h,
+                          currentPageDecoration: const BoxDecoration(
+                            color: AppColors.filler,
+                            border: Border(
+                              bottom: BorderSide(
+                                color: AppColors.accent,
+                                width: 10,
+                              ),
+                            ),
+                          ),
                           currentPageWidget: (page, isCurrent) {
                             return Positioned.fill(
                               child: DecoratedBox(
