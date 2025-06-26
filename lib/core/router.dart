@@ -1,8 +1,11 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pdf_test/core/core.dart';
 import 'package:pdf_test/features/home/home.dart';
 import 'package:pdf_test/features/preview/preview.dart';
+import 'package:pro_image_editor/pro_image_editor.dart';
 
 /// App route context key
 final GlobalKey<NavigatorState> rootKey = GlobalKey<NavigatorState>();
@@ -16,6 +19,15 @@ final router = GoRouter(
       parentNavigatorKey: rootKey,
       path: '/home_page',
       builder: (_, _) => const HomePage(),
+      routes: [
+        GoRoute(
+          path: 'pdf_preview',
+          builder: (context, state) {
+            final path = state.extra! as String;
+            return PdfPreview(path: path);
+          },
+        ),
+      ],
     ),
     GoRoute(
       path: '/loading_modal',
@@ -27,11 +39,19 @@ final router = GoRouter(
       ),
     ),
     GoRoute(
-      path: '/pdf_preview',
-      parentNavigatorKey: rootKey,
-      builder: (context, state) {
-        final path = state.extra! as String;
-        return PdfPreview(path: path);
+      path: '/pdf_edit',
+      pageBuilder: (context, state) {
+        final bytes = state.extra! as Uint8List;
+        return MaterialPage<void>(
+          key: state.pageKey,
+          fullscreenDialog: true,
+          child: ProImageEditor.memory(
+            bytes,
+            callbacks: ProImageEditorCallbacks(
+              onImageEditingComplete: (edited) async => context.pop(edited),
+            ),
+          ),
+        );
       },
     ),
   ],

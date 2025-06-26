@@ -39,7 +39,7 @@ class HomePdfList extends StatelessWidget {
                 GestureDetector(
                   onTap: () {
                     context.push(
-                      '/pdf_preview',
+                      '/home_page/pdf_preview',
                       extra: fileList[index].filePath,
                     );
                   },
@@ -56,7 +56,7 @@ class HomePdfList extends StatelessWidget {
                   child: GestureDetector(
                     onTap: () {
                       context.push(
-                        '/pdf_preview',
+                        '/home_page/pdf_preview',
                         extra: fileList[index].filePath,
                       );
                     },

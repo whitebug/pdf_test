@@ -8,5 +8,6 @@ abstract class PreviewState with _$PreviewState {
     @Default(0) int currentPage,
     @Default(1) int overallPages,
     @Default(false) bool isReady,
+    Uint8List? imageBytes,
   }) = _State;
 }

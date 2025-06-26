@@ -85,7 +85,8 @@ class _PdfTile extends StatelessWidget {
       child: Row(
         children: [
           GestureDetector(
-            onTap: () => context.push('/pdf_preview', extra: file.filePath),
+            onTap: () =>
+                context.push('/home_page/pdf_preview', extra: file.filePath),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8.r),
               child: Assets.images.doc.image(width: 49.w, height: 63.39.h),
@@ -94,7 +95,8 @@ class _PdfTile extends StatelessWidget {
           const SizedSBox(width: 16),
           Expanded(
             child: GestureDetector(
-              onTap: () => context.push('/pdf_preview', extra: file.filePath),
+              onTap: () =>
+                  context.push('/home_page/pdf_preview', extra: file.filePath),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

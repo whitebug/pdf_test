@@ -1,13 +1,16 @@
 import 'dart:async';
+import 'dart:typed_data';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:path/path.dart';
 import 'package:pdf_test/core/core.dart';
 import 'package:pdf_test/features/preview/preview.dart';
 import 'package:pdf_thumbnail/pdf_thumbnail.dart';
+import 'package:pro_image_editor/pro_image_editor.dart';
 
 /// Document preview
 class PdfPreview extends StatefulWidget {
@@ -38,6 +41,25 @@ class _PdfPreviewState extends State<PdfPreview> {
     fileName = widget.path != null
         ? basename(widget.path!)
         : 'previewName'.tr();
+  }
+
+  Future<Uint8List?> editPage(
+    BuildContext context,
+    Uint8List bytes,
+  ) async {
+    return Navigator.of(context).push(
+      MaterialPageRoute(
+        fullscreenDialog: true,
+        builder: (_) => ProImageEditor.memory(
+          bytes,
+          callbacks: ProImageEditorCallbacks(
+            onImageEditingComplete: (Uint8List edited) async {
+              Navigator.pop(context, edited);
+            },
+          ),
+        ),
+      ),
+    );
   }
 
   @override
@@ -107,7 +129,12 @@ class _PdfPreviewState extends State<PdfPreview> {
                 left: 0,
                 right: 0,
                 child: PreviewActionBar(
-                  onEdit: () {},
+                  onEdit: () async {
+                    await context.read<PreviewCubit>().renderPageAsImage(
+                      widget.path!,
+                      currentPage ?? 1,
+                    );
+                  },
                   onAdd: () {},
                 ),
               ),
