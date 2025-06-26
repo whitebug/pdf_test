@@ -39,38 +39,50 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   CustomScrollView(
                     slivers: [
-                      const SizedSliver(height: 30),
-                      SizedSliver(
-                        height: 40,
-                        child: Row(
+                      SliverAppBar(
+                        pinned: true,
+                        backgroundColor: AppColors.background,
+                        automaticallyImplyLeading: false,
+                        collapsedHeight: 160.h,
+                        expandedHeight: 160.h,
+                        toolbarHeight: 0,
+                        elevation: 0,
+                        scrolledUnderElevation: 0,
+                        surfaceTintColor: Colors.transparent,
+                        flexibleSpace: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const SizedSBox(width: 20),
-                            SizedSBox(
-                              height: 33.82,
-                              child: Assets.images.logo.image(),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SliverToBoxAdapter(
-                        child: Padding(
-                          padding: EdgeInsetsS.all(18),
-                          child: RoundedTextField(
-                            controller: searchController,
-                            height: 52.h,
-                            focusNode: focusNode,
-                            onTapOutside: (event) {
-                              focusNode.unfocus();
-                            },
-                            hintTextStr: 'searchHint'.tr(),
-                            suffixIcon: Padding(
-                              padding: EdgeInsetsS.only(right: 22.w),
-                              child: Assets.images.search.image(
-                                width: 24.sp,
-                                height: 24.sp,
+                            const SizedBox(height: 30),
+                            SizedBox(
+                              height: 40,
+                              child: Row(
+                                children: [
+                                  const SizedBox(width: 20),
+                                  SizedBox(
+                                    height: 33.82,
+                                    child: Assets.images.logo.image(),
+                                  ),
+                                ],
                               ),
                             ),
-                          ),
+                            Padding(
+                              padding: EdgeInsetsS.all(18),
+                              child: RoundedTextField(
+                                controller: searchController,
+                                height: 52.h,
+                                focusNode: focusNode,
+                                onTapOutside: (_) => focusNode.unfocus(),
+                                hintTextStr: 'searchHint'.tr(),
+                                suffixIcon: Padding(
+                                  padding: EdgeInsets.only(right: 22.w),
+                                  child: Assets.images.search.image(
+                                    width: 24.sp,
+                                    height: 24.sp,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                       if (state.pdfList.isEmpty)

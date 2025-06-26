@@ -46,6 +46,7 @@ class _PdfPreviewState extends State<PdfPreview> {
       color: AppColors.filler,
       child: SafeArea(
         child: Scaffold(
+          backgroundColor: AppColors.background,
           body: Stack(
             children: <Widget>[
               Padding(

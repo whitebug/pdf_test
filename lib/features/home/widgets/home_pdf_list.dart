@@ -21,9 +21,15 @@ class HomePdfList extends StatelessWidget {
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (context, index) {
+          final isTheLast = index == fileList.length - 1;
           return Container(
             margin: EdgeInsets.symmetric(horizontal: 18.w, vertical: 8.h),
-            padding: EdgeInsets.all(12.w),
+            padding: EdgeInsets.only(
+              top: 12.h,
+              bottom: isTheLast ? 300.h : 12.h,
+              left: 12.w,
+              right: 12.w,
+            ),
             decoration: BoxDecoration(
               color: AppColors.background,
               borderRadius: BorderRadius.circular(14.r),
@@ -47,21 +53,29 @@ class HomePdfList extends StatelessWidget {
                 ),
                 SizedBox(width: 16.w),
                 Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        fileList[index].fileName,
-                        style: AppText.subHeading,
-                      ),
-                      SizedBox(height: 6.h),
-                      Text(
-                        '1|${HomeUtils.getFormattedData(
-                          date: fileList[index].dateTime,
-                        )}',
-                        style: AppText.subHeadingLight,
-                      ),
-                    ],
+                  child: GestureDetector(
+                    onTap: () {
+                      context.push(
+                        '/pdf_preview',
+                        extra: fileList[index].filePath,
+                      );
+                    },
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          fileList[index].fileName,
+                          style: AppText.subHeading,
+                        ),
+                        SizedBox(height: 6.h),
+                        Text(
+                          '1|${HomeUtils.getFormattedData(
+                            date: fileList[index].dateTime,
+                          )}',
+                          style: AppText.subHeadingLight,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 IconButton(
