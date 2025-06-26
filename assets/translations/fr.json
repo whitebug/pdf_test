@@ -1,0 +1,13 @@
+{
+  "documents": "Documents",
+  "noDocumentsFound": "Aucun document trouvé",
+  "tapToScan": "Appuyez sur le bouton ci-dessous pour scanner ou convertir en PDF",
+  "searchHint": "Rechercher...",
+  "unknownPlatformDocuments": "Documents de plateforme inconnue",
+  "failedToGetScannedDocuments": "Échec de la récupération des documents numérisés.",
+  "oneMoment": "Un instant, veuillez patienter...",
+  "filesFetchError": "Erreur de récupération des fichiers",
+  "previewName": "Document {page}",
+  "previewPages": "{current} sur {overall}",
+  "share": "Partager"
+}

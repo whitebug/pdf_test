@@ -1,0 +1,13 @@
+{
+  "documents": "Документы",
+  "noDocumentsFound": "Документы не найдены",
+  "tapToScan": "Нажмите на кнопку ниже, чтобы отсканировать или преобразовать в PDF",
+  "searchHint": "Найти...",
+  "unknownPlatformDocuments": "Неизвестная платформа документов",
+  "failedToGetScannedDocuments": "Не удалось получить отсканированные документы.",
+  "oneMoment": "Одну минуту, пожалуйста, подождите...",
+  "filesFetchError": "Ошибка получения файлов",
+  "previewName": "Документ {page}",
+  "previewPages": "{current} из {overall}",
+  "share": "Поделиться"
+}

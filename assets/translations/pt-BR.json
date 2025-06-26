@@ -1,0 +1,13 @@
+{
+  "documents": "Documentos",
+  "noDocumentsFound": "Nenhum documento encontrado",
+  "tapToScan": "Toque no botão abaixo para escanear ou converter em PDF",
+  "searchHint": "Pesquisar...",
+  "unknownPlatformDocuments": "Documentos de plataforma desconhecida",
+  "failedToGetScannedDocuments": "Falha ao obter os documentos digitalizados.",
+  "oneMoment": "Um momento, por favor aguarde...",
+  "filesFetchError": "Erro ao buscar os arquivos",
+  "previewName": "Documento {page}",
+  "previewPages": "{current} de {overall}",
+  "share": "Compartilhar"
+}

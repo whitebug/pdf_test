@@ -1,0 +1,110 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pdf_test/core/core.dart';
+import 'package:pdf_test/features/home/home.dart';
+import 'package:pdf_test/ui_assets/assets.gen.dart';
+
+/// Main page
+class HomePage extends StatefulWidget {
+  /// Init
+  const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  late final TextEditingController searchController = TextEditingController();
+  final FocusNode focusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<HomeCubit>().getPdfDocuments();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+      color: AppColors.background,
+      child: SafeArea(
+        child: Scaffold(
+          backgroundColor: AppColors.background,
+          body: BlocBuilder<HomeCubit, HomeState>(
+            builder: (context, state) {
+              return Stack(
+                alignment: Alignment.topCenter,
+                children: [
+                  CustomScrollView(
+                    slivers: [
+                      const SizedSliver(height: 30),
+                      SizedSliver(
+                        height: 40,
+                        child: Row(
+                          children: [
+                            const SizedSBox(width: 20),
+                            SizedSBox(
+                              height: 33.82,
+                              child: Assets.images.logo.image(),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SliverToBoxAdapter(
+                        child: Padding(
+                          padding: EdgeInsetsS.all(18),
+                          child: RoundedTextField(
+                            controller: searchController,
+                            height: 52.h,
+                            focusNode: focusNode,
+                            onTapOutside: (event) {
+                              focusNode.unfocus();
+                            },
+                            hintTextStr: 'searchHint'.tr(),
+                            suffixIcon: Padding(
+                              padding: EdgeInsetsS.only(right: 22.w),
+                              child: Assets.images.search.image(
+                                width: 24.sp,
+                                height: 24.sp,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      if (state.pdfList.isEmpty)
+                        SliverPadding(
+                          padding: EdgeInsetsS.symmetric(
+                            horizontal: 18,
+                            vertical: 8,
+                          ),
+                          sliver: SliverToBoxAdapter(
+                            child: NothingCard(
+                              header: Text(
+                                'documents',
+                                style: AppText.heading,
+                              ).tr(),
+                            ),
+                          ),
+                        ),
+                      HomePdfList(fileList: state.pdfList),
+                    ],
+                  ),
+                  Positioned(
+                    bottom: 11.h,
+                    child: ScanMenu(
+                      onMainTap: () {
+                        context.read<HomeCubit>().scanDocument();
+                      },
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
+        ),
+      ),
+    );
+  }
+}

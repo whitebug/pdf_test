@@ -1,0 +1,13 @@
+{
+  "documents": "Dokumente",
+  "noDocumentsFound": "Keine Dokumente gefunden",
+  "tapToScan": "Tippen Sie unten auf die Schaltfläche, um zu scannen oder in PDF zu konvertieren",
+  "searchHint": "Suchen...",
+  "unknownPlatformDocuments": "Unbekannte Plattformdokumente",
+  "failedToGetScannedDocuments": "Abrufen der gescannten Dokumente fehlgeschlagen.",
+  "oneMoment": "Einen Moment bitte, warten Sie...",
+  "filesFetchError": "Fehler beim Abrufen der Dateien",
+  "previewName": "Dokument {page}",
+  "previewPages": "{current} von {overall}",
+  "share": "Teilen"
+}
