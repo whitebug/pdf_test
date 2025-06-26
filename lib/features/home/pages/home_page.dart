@@ -72,6 +72,11 @@ class _HomePageState extends State<HomePage> {
                                 height: 52.h,
                                 focusNode: focusNode,
                                 onTapOutside: (_) => focusNode.unfocus(),
+                                onChanged: (query) {
+                                  context.read<HomeCubit>().searchItems(
+                                    query: query,
+                                  );
+                                },
                                 hintTextStr: 'searchHint'.tr(),
                                 suffixIcon: Padding(
                                   padding: EdgeInsets.only(right: 22.w),
@@ -100,7 +105,8 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                         ),
-                      HomePdfList(fileList: state.pdfList),
+                      HomeList(fileList: state.pdfFilteredList),
+                      const SizedSliver(height: 100),
                     ],
                   ),
                   Positioned(

@@ -24,11 +24,12 @@ class HomeCubit extends Cubit<HomeState> {
   void getPdfDocuments() {
     emit(state.copyWith(isLoading: true));
     try {
-      final pdfList = objectBox.pdfBox.getAll();
+      final pdfs = objectBox.pdfBox.getAll()
+        ..sort((a, b) => b.dateTime.compareTo(a.dateTime));
       emit(
         state.copyWith(
-          pdfList: pdfList,
-          pdfFilteredList: pdfList,
+          pdfList: pdfs,
+          pdfFilteredList: pdfs,
           readPdfError: null,
           isLoading: false,
         ),
@@ -80,5 +81,33 @@ class HomeCubit extends Cubit<HomeState> {
         ),
       );
     }
+  }
+
+  /// Change sorting
+  void changeSort() {
+    final pdfs = state.pdfFilteredList.toList();
+    if (state.isDesc) {
+      pdfs.sort((a, b) => b.dateTime.compareTo(a.dateTime));
+    } else {
+      pdfs.sort((a, b) => a.dateTime.compareTo(b.dateTime));
+    }
+    emit(
+      state.copyWith(
+        isDesc: !state.isDesc,
+        pdfFilteredList: pdfs,
+      ),
+    );
+  }
+
+  /// Search through items
+  void searchItems({String? query}) {
+    if (query == null || query.isEmpty) {
+      emit(state.copyWith(pdfFilteredList: state.pdfList));
+      return;
+    }
+    final filtered = state.pdfFilteredList.where((pdf) {
+      return pdf.fileName.toLowerCase().contains(query);
+    }).toList();
+    emit(state.copyWith(pdfFilteredList: filtered));
   }
 }

@@ -4,7 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pdf_test/core/core.dart';
 import 'package:pdf_test/ui_assets/assets.gen.dart';
 
+/// Card that appears when there is nothing to show
 class NothingCard extends StatelessWidget {
+  /// Init
   const NothingCard({
     this.header,
     this.subHeader,
@@ -12,8 +14,13 @@ class NothingCard extends StatelessWidget {
     super.key,
   });
 
+  /// Header
   final Widget? header;
+
+  /// Sub header
   final Widget? subHeader;
+
+  /// Body
   final Widget? body;
 
   @override

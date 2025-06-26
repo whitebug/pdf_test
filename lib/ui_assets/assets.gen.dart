@@ -40,6 +40,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/share.png
   AssetGenImage get share => const AssetGenImage('assets/images/share.png');
 
+  /// File path: assets/images/sorter.png
+  AssetGenImage get sorter => const AssetGenImage('assets/images/sorter.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
     add,
@@ -51,6 +54,7 @@ class $AssetsImagesGen {
     scan,
     search,
     share,
+    sorter,
   ];
 }
 
