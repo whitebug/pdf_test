@@ -7,7 +7,7 @@
   "failedToGetScannedDocuments": "Не удалось получить отсканированные документы.",
   "oneMoment": "Одну минуту, пожалуйста, подождите...",
   "filesFetchError": "Ошибка получения файлов",
-  "previewName": "Документ {page}",
+  "previewName": "Документ",
   "previewPages": "{current} из {overall}",
   "share": "Поделиться"
 }

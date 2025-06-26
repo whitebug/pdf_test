@@ -7,7 +7,7 @@ import 'package:pdf_test/ui_assets/assets.gen.dart';
 class ScanMenu extends StatelessWidget {
   /// Init
   const ScanMenu({super.key, this.onMainTap});
-  
+
   /// On main button tap
   final VoidCallback? onMainTap;
 
@@ -34,6 +34,7 @@ class ScanMenu extends StatelessWidget {
               ],
             ),
           ),
+
           /// Red circular button
           Positioned(
             top: 0,

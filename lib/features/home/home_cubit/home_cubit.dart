@@ -33,7 +33,7 @@ class HomeCubit extends Cubit<HomeState> {
           isLoading: false,
         ),
       );
-    } on Exception catch(_) {
+    } on Exception catch (_) {
       emit(
         state.copyWith(
           isLoading: false,

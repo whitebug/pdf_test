@@ -7,7 +7,7 @@
   "failedToGetScannedDocuments": "Abrufen der gescannten Dokumente fehlgeschlagen.",
   "oneMoment": "Einen Moment bitte, warten Sie...",
   "filesFetchError": "Fehler beim Abrufen der Dateien",
-  "previewName": "Dokument {page}",
+  "previewName": "Dokument",
   "previewPages": "{current} von {overall}",
   "share": "Teilen"
 }

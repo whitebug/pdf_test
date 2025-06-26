@@ -1,9 +1,10 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:path/path.dart';
 import 'package:pdf_test/core/core.dart';
 import 'package:pdf_test/features/preview/preview.dart';
 import 'package:pdf_thumbnail/pdf_thumbnail.dart';
@@ -29,44 +30,56 @@ class _PdfPreviewState extends State<PdfPreview> {
   int? currentPage = 0;
   bool isReady = false;
   String errorMessage = '';
+  String fileName = '';
+
+  @override
+  void initState() {
+    super.initState();
+    fileName = widget.path != null
+        ? basename(widget.path!)
+        : 'previewName'.tr();
+  }
 
   @override
   Widget build(BuildContext context) {
     return ColoredBox(
-      color: AppColors.background,
+      color: AppColors.filler,
       child: SafeArea(
         child: Scaffold(
           body: Stack(
             children: <Widget>[
-              PDFView(
-                filePath: widget.path,
-                swipeHorizontal: true,
-                autoSpacing: false,
-                defaultPage: currentPage!,
-                fitPolicy: FitPolicy.BOTH,
-                backgroundColor: AppColors.background,
-                onRender: (pages) {
-                  setState(() {
-                    overallPages = pages;
-                    isReady = true;
-                  });
-                },
-                onError: (error) {
-                  setState(() {
-                    errorMessage = error.toString();
-                  });
-                },
-                onPageError: (page, error) {
-                  setState(() {
-                    errorMessage = '$page: $error';
-                  });
-                },
-                onViewCreated: controller.complete,
-                onPageChanged: (int? page, int? total) {
-                  setState(() {
-                    currentPage = page;
-                  });
-                },
+              Padding(
+                padding: EdgeInsetsS.only(top: 90, bottom: 200),
+                child: PDFView(
+                  filePath: widget.path,
+                  swipeHorizontal: true,
+                  autoSpacing: false,
+                  defaultPage: currentPage!,
+                  fitPolicy: FitPolicy.BOTH,
+                  backgroundColor: AppColors.background,
+                  onRender: (pages) {
+                    setState(() {
+                      overallPages = pages;
+                      isReady = true;
+                    });
+                  },
+                  onError: (error) {
+                    setState(() {
+                      errorMessage = error.toString();
+                    });
+                  },
+                  onPageError: (page, error) {
+                    setState(() {
+                      errorMessage = '$page: $error';
+                    });
+                  },
+                  onViewCreated: controller.complete,
+                  onPageChanged: (int? page, int? total) {
+                    setState(() {
+                      currentPage = page;
+                    });
+                  },
+                ),
               ),
               if (errorMessage.isEmpty)
                 !isReady
@@ -80,15 +93,27 @@ class _PdfPreviewState extends State<PdfPreview> {
                 ),
               Positioned(
                 top: 0,
+                left: 0,
+                right: 0,
                 child: PreviewAppBar(
+                  fileName: fileName,
                   currentPage: currentPage,
                   overallPages: overallPages,
                 ),
               ),
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: PreviewActionBar(
+                  onEdit: () {},
+                  onAdd: () {},
+                ),
+              ),
               if (widget.path != null)
                 Positioned(
-                  bottom: 0,
-                  left: 29,
+                  bottom: 110.h,
+                  left: 18.w,
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: FutureBuilder(
@@ -96,20 +121,25 @@ class _PdfPreviewState extends State<PdfPreview> {
                       builder: (context, snapshot) {
                         return PdfThumbnail.fromFile(
                           widget.path!,
-                          currentPage: currentPage ?? 0,
+                          currentPage: (currentPage ?? 0) + 1,
                           backgroundColor: AppColors.background.withValues(
                             alpha: 0.5,
                           ),
                           height: 80.h,
-                          currentPageDecoration: const BoxDecoration(
-                            color: Colors.white,
-                            border: Border(
-                              bottom: BorderSide(
-                                color: Colors.orange,
-                                width: 10,
+                          currentPageWidget: (page, isCurrent) {
+                            return Positioned.fill(
+                              child: DecoratedBox(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(2),
+                                  border: Border.all(
+                                    color: isCurrent
+                                        ? AppColors.accent
+                                        : AppColors.filler,
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
+                            );
+                          },
                           onPageClicked: (page) async {
                             setState(() {
                               currentPage = page;

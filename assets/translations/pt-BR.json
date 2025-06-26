@@ -7,7 +7,7 @@
   "failedToGetScannedDocuments": "Falha ao obter os documentos digitalizados.",
   "oneMoment": "Um momento, por favor aguarde...",
   "filesFetchError": "Erro ao buscar os arquivos",
-  "previewName": "Documento {page}",
+  "previewName": "Documento",
   "previewPages": "{current} de {overall}",
   "share": "Compartilhar"
 }

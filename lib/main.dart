@@ -8,9 +8,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pdf_test/core/core.dart';
 import 'package:pdf_test/core/object_box/object_box.dart';
 
-      Future<void> main() async {
-      await runZonedGuarded<Future<void>>(
-      () async {
+Future<void> main() async {
+  await runZonedGuarded<Future<void>>(
+    () async {
       WidgetsFlutterBinding.ensureInitialized();
       configureDependencies();
       await ScreenUtil.ensureScreenSize();

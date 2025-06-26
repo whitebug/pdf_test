@@ -7,7 +7,7 @@
   "failedToGetScannedDocuments": "Failed to get scanned documents.",
   "oneMoment": "One moment, please wait...",
   "filesFetchError": "Files fetch error",
-  "previewName": "Document {page}",
+  "previewName": "Document",
   "previewPages": "{current} of {overall}",
   "share": "Share"
 }

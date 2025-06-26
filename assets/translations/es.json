@@ -7,7 +7,7 @@
   "failedToGetScannedDocuments": "No se pudieron obtener los documentos escaneados.",
   "oneMoment": "Un momento, por favor espere...",
   "filesFetchError": "Error al obtener los archivos",
-  "previewName": "Documento {page}",
+  "previewName": "Documento",
   "previewPages": "{current} de {overall}",
   "share": "Compartir"
 }

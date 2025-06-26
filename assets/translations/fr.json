@@ -7,7 +7,7 @@
   "failedToGetScannedDocuments": "Échec de la récupération des documents numérisés.",
   "oneMoment": "Un instant, veuillez patienter...",
   "filesFetchError": "Erreur de récupération des fichiers",
-  "previewName": "Document {page}",
+  "previewName": "Document",
   "previewPages": "{current} sur {overall}",
   "share": "Partager"
 }

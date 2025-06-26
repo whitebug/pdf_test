@@ -41,7 +41,7 @@ class PdfPagePreviewList extends StatelessWidget {
                     color: Colors.black12,
                     blurRadius: 4.r,
                     offset: Offset(0, 2.h),
-                  )
+                  ),
                 ],
               ),
               child: ClipRRect(

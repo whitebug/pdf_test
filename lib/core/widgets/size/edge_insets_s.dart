@@ -22,9 +22,9 @@ class EdgeInsetsS extends EdgeInsets {
 
   /// fromLTRB
   EdgeInsetsS.fromLTRB(
-      double left,
-      double top,
-      double right,
-      double bottom,
-      ) : super.fromLTRB(left.r, top.r, right.r, bottom.r);
+    double left,
+    double top,
+    double right,
+    double bottom,
+  ) : super.fromLTRB(left.r, top.r, right.r, bottom.r);
 }

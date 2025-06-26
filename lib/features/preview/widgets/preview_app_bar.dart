@@ -9,10 +9,14 @@ import 'package:pdf_test/ui_assets/assets.gen.dart';
 class PreviewAppBar extends StatelessWidget {
   /// Init
   const PreviewAppBar({
+    required this.fileName,
     this.currentPage,
     this.overallPages,
     super.key,
   });
+
+  /// Name
+  final String fileName;
 
   /// Current
   final int? currentPage;
@@ -22,6 +26,7 @@ class PreviewAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final page = (currentPage ?? 0) + 1;
     return Container(
       margin: EdgeInsetsS.symmetric(horizontal: 18, vertical: 8),
       height: 56,
@@ -42,10 +47,15 @@ class PreviewAppBar extends StatelessWidget {
             icon: const Icon(Icons.arrow_back, color: AppColors.text),
             onPressed: () => context.pop(),
           ),
-          Text(
-            'previewName',
-            style: AppText.body,
-          ).tr(namedArgs: {'page': '${currentPage ?? 1}'}),
+          SizedBox(
+            width: MediaQuery.of(context).size.width / 4,
+            child: Text(
+              fileName,
+              style: AppText.body,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+            ),
+          ),
           const SizedBox(width: 8),
           Text(
             '|',
@@ -57,7 +67,7 @@ class PreviewAppBar extends StatelessWidget {
             style: AppText.subHeadingInactive,
           ).tr(
             namedArgs: {
-              'current': '${currentPage ?? 1}',
+              'current': '$page',
               'overall': '${overallPages ?? 1}',
             },
           ),
