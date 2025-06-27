@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:path/path.dart' as p;
 import 'package:pdf_test/core/core.dart';
 import 'package:pdf_test/features/preview/preview.dart';
 import 'package:pdf_test/ui_assets/assets.gen.dart';
@@ -57,7 +58,7 @@ class PreviewAppBar extends StatelessWidget {
             SizedBox(
               width: MediaQuery.of(context).size.width / 4,
               child: Text(
-                fileName!,
+                '${p.basenameWithoutExtension(fileName!)} $overallPages',
                 style: AppText.body,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,

@@ -80,10 +80,23 @@ class _HomePageState extends State<HomePage> {
                                 hintTextStr: 'searchHint'.tr(),
                                 suffixIcon: Padding(
                                   padding: EdgeInsets.only(right: 22.w),
-                                  child: Assets.images.search.image(
-                                    width: 24.sp,
-                                    height: 24.sp,
-                                  ),
+                                  child: searchController.text.isEmpty
+                                      ? Assets.images.search.image(
+                                          width: 24.sp,
+                                          height: 24.sp,
+                                        )
+                                      : GestureDetector(
+                                          onTap: () {
+                                            searchController.clear();
+                                            context
+                                                .read<HomeCubit>()
+                                                .searchItems();
+                                          },
+                                          child: Assets.images.cross.image(
+                                            width: 24.sp,
+                                            height: 24.sp,
+                                          ),
+                                        ),
                                 ),
                               ),
                             ),

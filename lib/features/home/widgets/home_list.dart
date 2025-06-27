@@ -41,14 +41,23 @@ class HomeList extends StatelessWidget {
                 children: [
                   Text('documents'.tr(), style: AppText.heading),
                   const Spacer(),
-                  GestureDetector(
-                    onTap: () {
-                      context.read<HomeCubit>().changeSort();
+                  BlocBuilder<HomeCubit, HomeState>(
+                    builder: (context, state) {
+                      return GestureDetector(
+                        onTap: () {
+                          context.read<HomeCubit>().changeSort();
+                        },
+                        child: state.isDesc
+                            ? Assets.images.sortFalse.image(
+                                width: 34.w,
+                                height: 34.w,
+                              )
+                            : Assets.images.sortTrue.image(
+                                width: 34.w,
+                                height: 34.w,
+                              ),
+                      );
                     },
-                    child: Assets.images.sorter.image(
-                      width: 34.w,
-                      height: 34.w,
-                    ),
                   ),
                 ],
               ),
@@ -105,7 +114,7 @@ class _PdfTile extends StatelessWidget {
                   SizedBox(height: 6.h),
                   Text(
                     '${file.pageNumber} |'
-                        ' ${HomeUtils.getFormattedData(date: file.dateTime)}',
+                    ' ${HomeUtils.getFormattedData(date: file.dateTime)}',
                     style: AppText.subHeadingLight,
                   ),
                 ],

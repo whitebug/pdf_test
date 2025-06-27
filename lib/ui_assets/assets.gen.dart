@@ -15,6 +15,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/add.png
   AssetGenImage get add => const AssetGenImage('assets/images/add.png');
 
+  /// File path: assets/images/cross.png
+  AssetGenImage get cross => const AssetGenImage('assets/images/cross.png');
+
   /// File path: assets/images/doc.png
   AssetGenImage get doc => const AssetGenImage('assets/images/doc.png');
 
@@ -40,12 +43,21 @@ class $AssetsImagesGen {
   /// File path: assets/images/share.png
   AssetGenImage get share => const AssetGenImage('assets/images/share.png');
 
+  /// File path: assets/images/sort_false.png
+  AssetGenImage get sortFalse =>
+      const AssetGenImage('assets/images/sort_false.png');
+
+  /// File path: assets/images/sort_true.png
+  AssetGenImage get sortTrue =>
+      const AssetGenImage('assets/images/sort_true.png');
+
   /// File path: assets/images/sorter.png
   AssetGenImage get sorter => const AssetGenImage('assets/images/sorter.png');
 
   /// List of all assets
   List<AssetGenImage> get values => [
     add,
+    cross,
     doc,
     logo,
     nothing,
@@ -54,12 +66,17 @@ class $AssetsImagesGen {
     scan,
     search,
     share,
+    sortFalse,
+    sortTrue,
     sorter,
   ];
 }
 
 class $AssetsTranslationsGen {
   const $AssetsTranslationsGen();
+
+  /// File path: assets/translations/de.json
+  String get de => 'assets/translations/de.json';
 
   /// File path: assets/translations/en-US.json
   String get enUS => 'assets/translations/en-US.json';
@@ -73,9 +90,6 @@ class $AssetsTranslationsGen {
   /// File path: assets/translations/fr.json
   String get fr => 'assets/translations/fr.json';
 
-  /// File path: assets/translations/de.json
-  String get ge => 'assets/translations/de.json';
-
   /// File path: assets/translations/it.json
   String get it => 'assets/translations/it.json';
 
@@ -86,7 +100,7 @@ class $AssetsTranslationsGen {
   String get ru => 'assets/translations/ru.json';
 
   /// List of all assets
-  List<String> get values => [enUS, en, es, fr, ge, it, ptBR, ru];
+  List<String> get values => [de, enUS, en, es, fr, it, ptBR, ru];
 }
 
 class Assets {
