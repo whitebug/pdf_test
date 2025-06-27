@@ -10,6 +10,7 @@ import 'package:injectable/injectable.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf_test/core/core.dart';
+import 'package:syncfusion_flutter_pdf/pdf.dart' show PdfDocument;
 
 part 'home_cubit.freezed.dart';
 part 'home_state.dart';
@@ -69,11 +70,16 @@ class HomeCubit extends Cubit<HomeState> {
       await permDir.create(recursive: true);
       final permPath = p.join(permDir.path, fileName);
       final savedFile = await File(tempPath).rename(permPath);
+      final fileBytes = await File(savedFile.path).readAsBytes();
+      final document = PdfDocument(inputBytes: fileBytes);
+      final pageCount = document.pages.count;
+      document.dispose();
       objectBox.pdfBox.put(
         PdfFileEntity(
           fileName: fileName,
           filePath: savedFile.path,
           dateTime: DateTime.now(),
+          pageNumber: pageCount,
         ),
       );
       getPdfDocuments();
@@ -179,12 +185,14 @@ extension PdfFileEntityCopyWith on PdfFileEntity {
     String? fileName,
     String? filePath,
     DateTime? dateTime,
+    int? pageNumber,
   }) {
     return PdfFileEntity(
       id: id ?? this.id,
       fileName: fileName ?? this.fileName,
       filePath: filePath ?? this.filePath,
       dateTime: dateTime ?? this.dateTime,
+      pageNumber: pageNumber ?? this.pageNumber,
     );
   }
 }

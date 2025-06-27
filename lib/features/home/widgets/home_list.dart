@@ -104,7 +104,8 @@ class _PdfTile extends StatelessWidget {
                   Text(file.fileName, style: AppText.subHeading),
                   SizedBox(height: 6.h),
                   Text(
-                    '1 | ${HomeUtils.getFormattedData(date: file.dateTime)}',
+                    '${file.pageNumber} |'
+                        ' ${HomeUtils.getFormattedData(date: file.dateTime)}',
                     style: AppText.subHeadingLight,
                   ),
                 ],

@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "1:2424948342513666008",
-      "lastPropertyId": "4:6654578988581014811",
+      "lastPropertyId": "5:4793778682708518279",
       "name": "PdfFileEntity",
       "properties": [
         {
@@ -28,6 +28,11 @@
           "id": "4:6654578988581014811",
           "name": "dateTime",
           "type": 10
+        },
+        {
+          "id": "5:4793778682708518279",
+          "name": "pageNumber",
+          "type": 6
         }
       ],
       "relations": []

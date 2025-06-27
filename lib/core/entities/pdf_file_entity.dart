@@ -8,6 +8,7 @@ class PdfFileEntity {
     required this.fileName,
     required this.filePath,
     required this.dateTime,
+    required this.pageNumber,
     this.id = 0,
   });
 
@@ -23,4 +24,7 @@ class PdfFileEntity {
 
   /// Date
   DateTime dateTime;
+
+  /// Page number
+  int pageNumber;
 }

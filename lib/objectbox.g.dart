@@ -22,7 +22,7 @@ final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
     id: const obx_int.IdUid(1, 2424948342513666008),
     name: 'PdfFileEntity',
-    lastPropertyId: const obx_int.IdUid(4, 6654578988581014811),
+    lastPropertyId: const obx_int.IdUid(5, 4793778682708518279),
     flags: 0,
     properties: <obx_int.ModelProperty>[
       obx_int.ModelProperty(
@@ -47,6 +47,12 @@ final _entities = <obx_int.ModelEntity>[
         id: const obx_int.IdUid(4, 6654578988581014811),
         name: 'dateTime',
         type: 10,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(5, 4793778682708518279),
+        name: 'pageNumber',
+        type: 6,
         flags: 0,
       ),
     ],
@@ -118,11 +124,12 @@ obx_int.ModelDefinition getObjectBoxModel() {
       objectToFB: (PdfFileEntity object, fb.Builder fbb) {
         final fileNameOffset = fbb.writeString(object.fileName);
         final filePathOffset = fbb.writeString(object.filePath);
-        fbb.startTable(5);
+        fbb.startTable(6);
         fbb.addInt64(0, object.id);
         fbb.addOffset(1, fileNameOffset);
         fbb.addOffset(2, filePathOffset);
         fbb.addInt64(3, object.dateTime.millisecondsSinceEpoch);
+        fbb.addInt64(4, object.pageNumber);
         fbb.finish(fbb.endTable());
         return object.id;
       },
@@ -138,6 +145,12 @@ obx_int.ModelDefinition getObjectBoxModel() {
         final dateTimeParam = DateTime.fromMillisecondsSinceEpoch(
           const fb.Int64Reader().vTableGet(buffer, rootOffset, 10, 0),
         );
+        final pageNumberParam = const fb.Int64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          12,
+          0,
+        );
         final idParam = const fb.Int64Reader().vTableGet(
           buffer,
           rootOffset,
@@ -148,6 +161,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
           fileName: fileNameParam,
           filePath: filePathParam,
           dateTime: dateTimeParam,
+          pageNumber: pageNumberParam,
           id: idParam,
         );
 
@@ -179,5 +193,10 @@ class PdfFileEntity_ {
   /// See [PdfFileEntity.dateTime].
   static final dateTime = obx.QueryDateProperty<PdfFileEntity>(
     _entities[0].properties[3],
+  );
+
+  /// See [PdfFileEntity.pageNumber].
+  static final pageNumber = obx.QueryIntegerProperty<PdfFileEntity>(
+    _entities[0].properties[4],
   );
 }
