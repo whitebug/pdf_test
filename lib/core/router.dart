@@ -42,17 +42,19 @@ Future<void> initRouter() async {
       ),
       GoRoute(
         path: '/onboarding',
+        parentNavigatorKey: rootKey,
         builder: (_, _) => const OnboardingScreen(),
       ),
       GoRoute(
         path: '/home_page',
+        parentNavigatorKey: rootKey,
         builder: (_, _) => const HomePage(),
         routes: [
           GoRoute(
             path: 'pdf_preview',
             builder: (context, state) {
-              final path = state.extra! as String;
-              return PdfPreview(path: path);
+              final path = state.extra as PdfFileEntity?;
+              return PdfPreview(file: path);
             },
           ),
         ],
@@ -68,6 +70,7 @@ Future<void> initRouter() async {
       ),
       GoRoute(
         path: '/pdf_edit',
+        parentNavigatorKey: rootKey,
         pageBuilder: (context, state) {
           final bytes = state.extra! as Uint8List;
           return MaterialPage<void>(

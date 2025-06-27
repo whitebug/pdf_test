@@ -11,7 +11,7 @@ class LoadingModal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: AppColors.filler.withValues(alpha: 0.2),
+      color: Colors.transparent,
       child: BlurredModal(
         modal: SizedBox.expand(
           child: Column(

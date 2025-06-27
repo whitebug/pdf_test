@@ -31,7 +31,7 @@ class PdfTile extends StatelessWidget {
             onTap: () {
               context.go(
                 '/home_page/pdf_preview',
-                extra: file.filePath,
+                extra: file,
               );
             },
             child: ClipRRect(
@@ -45,7 +45,7 @@ class PdfTile extends StatelessWidget {
               onTap: () {
                 context.go(
                   '/home_page/pdf_preview',
-                  extra: file.filePath,
+                  extra: file,
                 );
               },
               child: Column(

@@ -67,12 +67,14 @@ class DropMenu extends StatelessWidget {
         CupertinoActionSheetAction(
           onPressed: () {
             context.read<PreviewCubit>().printPdfFile(file.filePath);
+            context.pop();
           },
           child: const Text('print').tr(),
         ),
         CupertinoActionSheetAction(
           onPressed: () {
             context.read<PreviewCubit>().sharePdf(file.filePath);
+            context.pop();
           },
           child: const Text('share').tr(),
         ),
@@ -80,6 +82,7 @@ class DropMenu extends StatelessWidget {
           isDestructiveAction: true,
           onPressed: () {
             context.read<HomeCubit>().deleteDocument(file);
+            context.pop();
           },
           child: const Text('delete').tr(),
         ),

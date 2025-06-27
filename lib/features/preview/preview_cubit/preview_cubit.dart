@@ -9,7 +9,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:image/image.dart' as img_data;
 import 'package:injectable/injectable.dart';
 import 'package:pdf_render/pdf_render.dart';
-import 'package:pdf_test/core/router.dart';
+import 'package:pdf_test/core/core.dart';
 import 'package:pdf_test/features/home/home_cubit/home_cubit.dart';
 import 'package:printing/printing.dart';
 import 'package:share_plus/share_plus.dart';
@@ -55,36 +55,54 @@ class PreviewCubit extends Cubit<PreviewState> {
   }
 
   /// Edit
-  Future<void> editPdf(String pdfPath, int pageIndex) async {
-    final doc = await PdfDocument.openFile(pdfPath);
-    final page = await doc.getPage(pageIndex + 1);
-    final img = await page.render(
-      width: (page.width * 2).toInt(),
-      height: (page.height * 2).toInt(),
-    );
-
-    final uiImage = await img.createImageIfNotAvailable();
-    final byteData = await uiImage.toByteData(format: ui.ImageByteFormat.png);
-    final result = byteData!.buffer.asUint8List();
-    await doc.dispose();
-    emit(state.copyWith(imageBytes: result));
-    final pageImage = await router.push('/pdf_edit', extra: result);
-
-    if (pageImage == null) {
+  Future<void> editPdf(PdfFileEntity? file, int pageIndex) async {
+    if (file == null) {
       return;
     }
-    await _replacePage(
-      originalPath: pdfPath,
-      pageImage: pageImage as Uint8List,
-      pageIndex: pageIndex,
-    );
-    router.go('/home_page/pdf_preview', extra: pdfPath);
+    emit(state.copyWith(isLoading: true));
+    try {
+      final doc = await PdfDocument.openFile(file.filePath);
+      final page = await doc.getPage(pageIndex + 1);
+      final img = await page.render(
+        width: (page.width * 2).toInt(),
+        height: (page.height * 2).toInt(),
+      );
+
+      final uiImage = await img.createImageIfNotAvailable();
+      final byteData = await uiImage.toByteData(format: ui.ImageByteFormat.png);
+      final result = byteData!.buffer.asUint8List();
+      await doc.dispose();
+      emit(state.copyWith(imageBytes: result));
+      final pageImage = await router.push('/pdf_edit', extra: result);
+
+      if (pageImage == null) {
+        return;
+      }
+      await _replacePage(
+        originalPath: file.filePath,
+        pageImage: pageImage as Uint8List,
+        pageIndex: pageIndex,
+      );
+      while (router.canPop()) {
+        router.pop();
+      }
+      router.go('/home_page/pdf_preview', extra: file);
+    } on Exception {
+      emit(
+        state.copyWith(
+          error: 'failedToGetScannedDocuments'.tr(),
+          isLoading: false,
+        ),
+      );
+    } finally {
+      emit(state.copyWith(isLoading: false));
+    }
   }
 
   /// Add new pages to the end of a document
-  Future<void> appendPdf(String mainPath, String extraPath) async {
+  Future<void> appendPdf(PdfFileEntity file, String extraPath) async {
     final mainDoc = sfp.PdfDocument(
-      inputBytes: await File(mainPath).readAsBytes(),
+      inputBytes: await File(file.filePath).readAsBytes(),
     );
     final extraDoc = sfp.PdfDocument(
       inputBytes: await File(extraPath).readAsBytes(),
@@ -100,7 +118,13 @@ class PreviewCubit extends Cubit<PreviewState> {
         dstPage.size,
       );
     }
-    await File(mainPath).writeAsBytes(await mainDoc.save());
+
+    final updated = file.copyWith(
+      pageNumber: mainDoc.pages.count,
+    );
+    objectBox.pdfBox.put(updated);
+
+    await File(file.filePath).writeAsBytes(await mainDoc.save());
 
     mainDoc.dispose();
     extraDoc.dispose();
@@ -108,17 +132,35 @@ class PreviewCubit extends Cubit<PreviewState> {
 
   /// Scan document
   Future<void> addPages({
-    required String pdfPath,
+    required PdfFileEntity? file,
   }) async {
-    final scannedPath =
-        await FlutterDocScanner().getScannedDocumentAsPdf(page: pagesToScan)
-            as String?;
-    if (scannedPath == null) {
+    if (file == null) {
       return;
     }
-    await appendPdf(pdfPath, scannedPath);
-    emit(state.copyWith(error: null));
-    router.go('/home_page/pdf_preview', extra: pdfPath);
+    emit(state.copyWith(isLoading: true));
+    try {
+      final scannedPath =
+          await FlutterDocScanner().getScannedDocumentAsPdf(page: pagesToScan)
+              as String?;
+      if (scannedPath == null) {
+        return;
+      }
+      await appendPdf(file, scannedPath);
+      emit(state.copyWith(error: null, isLoading: false));
+      while (router.canPop()) {
+        router.pop();
+      }
+      router.go('/home_page/pdf_preview', extra: file);
+    } on Exception {
+      emit(
+        state.copyWith(
+          error: 'failedToGetScannedDocuments'.tr(),
+          isLoading: false,
+        ),
+      );
+    } finally {
+      emit(state.copyWith(isLoading: false));
+    }
   }
 
   /// Sharing
@@ -128,7 +170,6 @@ class PreviewCubit extends Cubit<PreviewState> {
     }
     final params = ShareParams(files: [XFile(pdfPath)]);
     SharePlus.instance.share(params);
-    router.pop();
   }
 
   /// Print
@@ -138,6 +179,5 @@ class PreviewCubit extends Cubit<PreviewState> {
       name: pdfPath.split('/').last,
       onLayout: (_) async => bytes,
     );
-    router.pop();
   }
 }

@@ -16,12 +16,12 @@ import 'package:pdf_thumbnail/pdf_thumbnail.dart';
 class PdfPreview extends StatefulWidget {
   /// Init
   const PdfPreview({
-    this.path,
+    this.file,
     super.key,
   });
 
   /// File path
-  final String? path;
+  final PdfFileEntity? file;
 
   @override
   State<PdfPreview> createState() => _PdfPreviewState();
@@ -38,13 +38,15 @@ class _PdfPreviewState extends State<PdfPreview> {
   @override
   void initState() {
     super.initState();
-    fileName = widget.path != null
-        ? basename(widget.path!)
+    fileName = widget.file != null
+        ? basename(widget.file!.filePath)
         : 'previewName'.tr();
   }
 
   @override
   Widget build(BuildContext context) {
+    final homeCubit = context.read<HomeCubit>();
+    final previewCubit = context.read<PreviewCubit>();
     return ColoredBox(
       color: AppColors.filler,
       child: SafeArea(
@@ -55,7 +57,7 @@ class _PdfPreviewState extends State<PdfPreview> {
               Padding(
                 padding: EdgeInsetsS.only(top: 90, bottom: 200),
                 child: PDFView(
-                  filePath: widget.path,
+                  filePath: widget.file?.filePath,
                   swipeHorizontal: true,
                   autoSpacing: false,
                   defaultPage: currentPage!,
@@ -100,7 +102,7 @@ class _PdfPreviewState extends State<PdfPreview> {
                 left: 0,
                 right: 0,
                 child: PreviewAppBar(
-                  path: widget.path,
+                  path: widget.file?.filePath,
                   fileName: fileName,
                   currentPage: currentPage,
                   overallPages: overallPages,
@@ -112,19 +114,20 @@ class _PdfPreviewState extends State<PdfPreview> {
                 right: 0,
                 child: PreviewActionBar(
                   onEdit: () async {
-                    await context.read<PreviewCubit>().editPdf(
-                      widget.path!,
+                    await previewCubit.editPdf(
+                      widget.file,
                       currentPage ?? 1,
                     );
                   },
                   onAdd: () async {
-                    await context.read<PreviewCubit>().addPages(
-                      pdfPath: widget.path!,
+                    await previewCubit.addPages(
+                      file: widget.file,
                     );
+                    homeCubit.getPdfDocuments();
                   },
                 ),
               ),
-              if (widget.path != null)
+              if (widget.file != null)
                 Positioned(
                   bottom: 110.h,
                   left: 18.w,
@@ -134,7 +137,7 @@ class _PdfPreviewState extends State<PdfPreview> {
                       future: controller.future,
                       builder: (context, snapshot) {
                         return PdfThumbnail.fromFile(
-                          widget.path!,
+                          widget.file!.filePath,
                           currentPage: (currentPage ?? 0) + 1,
                           backgroundColor: AppColors.background.withValues(
                             alpha: 0.5,

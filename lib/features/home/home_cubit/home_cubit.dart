@@ -134,7 +134,6 @@ class HomeCubit extends Cubit<HomeState> {
         ),
       );
     }
-    router.pop();
   }
 
   /// Rename file
