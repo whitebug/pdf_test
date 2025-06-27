@@ -16,5 +16,9 @@
   "cancel": "Cancel",
   "save": "Save",
   "noFile": "File does not exist",
-  "emptyField": "You must enter a file name"
+  "emptyField": "You must enter a file name",
+  "continue": "Continue",
+  "scanOrConvert": "Easily scan documents or convert them to PDF",
+  "rateUs": "Rate Us",
+  "improveFeedback": "Help us improve with your feedback"
 }

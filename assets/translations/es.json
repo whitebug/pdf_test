@@ -16,5 +16,9 @@
   "cancel": "Cancelar",
   "save": "Guardar",
   "noFile": "El archivo no existe",
-  "emptyField": "Debes ingresar un nombre de archivo"
+  "emptyField": "Debes ingresar un nombre de archivo",
+  "continue": "Continuar",
+  "scanOrConvert": "Escanea fácilmente documentos o conviértelos a PDF",
+  "rateUs": "Califícanos",
+  "improveFeedback": "Ayúdanos a mejorar con tus comentarios"
 }

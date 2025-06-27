@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pdf_test/core/core.dart';
+import 'package:pdf_test/features/preview/preview.dart';
 import 'package:pdf_test/ui_assets/assets.gen.dart';
 
 /// Action bar
@@ -39,49 +40,15 @@ class PreviewActionBar extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            _ActionTile(
+            ActionTile(
               icon: Assets.images.pen.image(width: 30.w, height: 30.w),
               label: 'Edit',
               onTap: onEdit,
             ),
-            _ActionTile(
+            ActionTile(
               icon: Assets.images.add.image(width: 30.w, height: 30.w),
               label: 'Add',
               onTap: onAdd,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _ActionTile extends StatelessWidget {
-  const _ActionTile({
-    required this.icon,
-    required this.label,
-    required this.onTap,
-  });
-
-  final Widget icon;
-  final String label;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      borderRadius: BorderRadius.circular(16),
-      onTap: onTap,
-      child: Padding(
-        padding: EdgeInsetsS.symmetric(horizontal: 34),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            icon,
-            const SizedBox(height: 6),
-            Text(
-              label,
-              style: AppText.bodySmall.copyWith(color: AppColors.text),
             ),
           ],
         ),

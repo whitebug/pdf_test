@@ -40,7 +40,32 @@ class HomeList extends StatelessWidget {
               Row(
                 children: [
                   Text('documents'.tr(), style: AppText.heading),
-                  const Spacer(),
+                  BlocListener<HomeCubit, HomeState>(
+                    listenWhen: (previous, current) =>
+                        previous.isLoading != current.isLoading ||
+                        previous.error != current.error,
+                    listener: (context, state) {
+                      final router = GoRouter.of(context);
+                      if (state.isLoading) {
+                        router.push('/loading_modal');
+                      } else {
+                        if (router.canPop()) {
+                          router.pop();
+                        }
+                      }
+                      if (state.error != null) {
+                        HomeUtils.showHomeDialog(
+                          context: context,
+                          title: Text(state.error!, style: AppText.subHeading),
+                          button: Text(
+                            'cancel',
+                            style: AppText.subHeadingInactive,
+                          ).tr(),
+                        );
+                      }
+                    },
+                    child: const Spacer(),
+                  ),
                   BlocBuilder<HomeCubit, HomeState>(
                     builder: (context, state) {
                       return GestureDetector(
@@ -68,69 +93,12 @@ class HomeList extends StatelessWidget {
                   padding: EdgeInsets.only(
                     bottom: i == fileList.length - 1 ? 0 : 16.h,
                   ),
-                  child: _PdfTile(file: fileList[i]),
+                  child: PdfTile(file: fileList[i]),
                 ),
               ),
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class _PdfTile extends StatelessWidget {
-  const _PdfTile({required this.file});
-
-  final PdfFileEntity file;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: AppColors.background.withValues(alpha: 0.6),
-        borderRadius: BorderRadius.circular(18.r),
-      ),
-      padding: EdgeInsetsS.all(12),
-      child: Row(
-        children: [
-          GestureDetector(
-            onTap: () =>
-                context.push('/home_page/pdf_preview', extra: file.filePath),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(8.r),
-              child: Assets.images.doc.image(width: 49.w, height: 63.39.h),
-            ),
-          ),
-          const SizedSBox(width: 16),
-          Expanded(
-            child: GestureDetector(
-              onTap: () =>
-                  context.push('/home_page/pdf_preview', extra: file.filePath),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(file.fileName, style: AppText.subHeading),
-                  SizedBox(height: 6.h),
-                  Text(
-                    '${file.pageNumber} |'
-                    ' ${HomeUtils.getFormattedData(date: file.dateTime)}',
-                    style: AppText.subHeadingLight,
-                  ),
-                ],
-              ),
-            ),
-          ),
-          IconButton(
-            icon: const Icon(Icons.more_vert, color: AppColors.accent),
-            onPressed: () {
-              showCupertinoModalPopup<bool>(
-                context: context,
-                builder: (_) => DropMenu(file: file),
-              );
-            },
-          ),
-        ],
       ),
     );
   }

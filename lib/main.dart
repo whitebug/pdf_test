@@ -17,6 +17,7 @@ Future<void> main() async {
       await EasyLocalization.ensureInitialized();
       objectBox = await ObjectBox.create();
       Bloc.observer = AppBlocObserver();
+      await initRouter();
       runApp(
         EasyLocalization(
           supportedLocales: const [

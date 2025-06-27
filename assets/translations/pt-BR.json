@@ -16,5 +16,9 @@
   "cancel": "Cancelar",
   "save": "Salvar",
   "noFile": "O arquivo não existe",
-  "emptyField": "É necessário inserir um nome de arquivo"
+  "emptyField": "É necessário inserir um nome de arquivo",
+  "continue": "Continuar",
+  "scanOrConvert": "Digitalize documentos facilmente ou converta-os em PDF",
+  "rateUs": "Avalie-nos",
+  "improveFeedback": "Ajude-nos a melhorar com seu feedback"
 }

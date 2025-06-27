@@ -67,4 +67,22 @@ class AppText {
     letterSpacing: 0,
     color: AppColors.lowLight,
   );
+
+  /// Onboarding title
+  static final TextStyle hugeTitle = TextStyle(
+    fontFamily: AppFonts.sfPro,
+    fontSize: 36.sp,
+    fontWeight: FontWeight.w600,
+    letterSpacing: 0,
+    color: AppColors.text,
+  );
+
+  /// Onboarding subtitle
+  static final TextStyle hugeSubtitle = TextStyle(
+    fontFamily: AppFonts.sfPro,
+    fontSize: 20.sp,
+    fontWeight: FontWeight.w600,
+    letterSpacing: 0,
+    color: AppColors.text,
+  );
 }

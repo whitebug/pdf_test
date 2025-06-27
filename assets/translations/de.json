@@ -16,5 +16,9 @@
   "cancel": "Abbrechen",
   "save": "Speichern",
   "noFile": "Datei existiert nicht",
-  "emptyField": "Dateiname muss eingegeben werden"
+  "emptyField": "Dateiname muss eingegeben werden",
+  "continue": "Weiter",
+  "scanOrConvert": "Scannen Sie Dokumente oder konvertieren Sie sie einfach in PDF",
+  "rateUs": "Bewerten Sie uns",
+  "improveFeedback": "Helfen Sie uns mit Ihrem Feedback, uns zu verbessern"
 }

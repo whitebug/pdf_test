@@ -26,26 +26,15 @@ class HomeCubit extends Cubit<HomeState> {
 
   /// Get all pdf documents saved previously
   void getPdfDocuments() {
-    emit(state.copyWith(isLoading: true));
-    try {
-      final pdfs = objectBox.pdfBox.getAll()
-        ..sort((a, b) => b.dateTime.compareTo(a.dateTime));
-      emit(
-        state.copyWith(
-          pdfList: pdfs,
-          pdfFilteredList: pdfs,
-          error: null,
-          isLoading: false,
-        ),
-      );
-    } on Exception catch (_) {
-      emit(
-        state.copyWith(
-          isLoading: false,
-          error: 'filesFetchError'.tr(),
-        ),
-      );
-    }
+    final pdfs = objectBox.pdfBox.getAll()
+      ..sort((a, b) => b.dateTime.compareTo(a.dateTime));
+    emit(
+      state.copyWith(
+        pdfList: pdfs,
+        pdfFilteredList: pdfs,
+        error: null,
+      ),
+    );
   }
 
   /// Scan
@@ -90,6 +79,8 @@ class HomeCubit extends Cubit<HomeState> {
           isLoading: false,
         ),
       );
+    } finally {
+      emit(state.copyWith(isLoading: false));
     }
   }
 
@@ -123,7 +114,6 @@ class HomeCubit extends Cubit<HomeState> {
 
   /// Delete document
   Future<void> deleteDocument(PdfFileEntity doc) async {
-    emit(state.copyWith(isLoading: true));
     try {
       final file = File(doc.filePath);
       if (file.existsSync()) {
@@ -135,14 +125,12 @@ class HomeCubit extends Cubit<HomeState> {
       emit(
         state.copyWith(
           error: 'fileSystemError'.tr(args: [e.message]),
-          isLoading: false,
         ),
       );
     } on Object catch (e, _) {
       emit(
         state.copyWith(
           error: 'failedToDeleteDocument'.tr(args: [doc.fileName]),
-          isLoading: false,
         ),
       );
     }
@@ -154,25 +142,33 @@ class HomeCubit extends Cubit<HomeState> {
     required PdfFileEntity pdf,
     required String? newName,
   }) async {
-    final oldFile = File(pdf.filePath);
-    if (!oldFile.existsSync()) {
-      emit(state.copyWith(error: 'noFile'.tr()));
-      return;
+    try {
+      final oldFile = File(pdf.filePath);
+      if (!oldFile.existsSync()) {
+        emit(state.copyWith(error: 'noFile'.tr()));
+        return;
+      }
+      if (!oldFile.existsSync() || newName == null) {
+        emit(state.copyWith(error: 'emptyField'.tr()));
+        return;
+      }
+      final dir = oldFile.parent.path;
+      final extension = p.extension(pdf.filePath);
+      final newFilePath = p.join(dir, '$newName$extension');
+      final newFile = await oldFile.rename(newFilePath);
+      final updatedPdf = pdf.copyWith(
+        fileName: '$newName$extension',
+        filePath: newFile.path,
+      );
+      objectBox.pdfBox.put(updatedPdf);
+      getPdfDocuments();
+    } on Exception {
+      emit(
+        state.copyWith(
+          error: 'noFile'.tr(),
+        ),
+      );
     }
-    if (!oldFile.existsSync() || newName == null) {
-      emit(state.copyWith(error: 'emptyField'.tr()));
-      return;
-    }
-    final dir = oldFile.parent.path;
-    final extension = p.extension(pdf.filePath);
-    final newFilePath = p.join(dir, '$newName$extension');
-    final newFile = await oldFile.rename(newFilePath);
-    final updatedPdf = pdf.copyWith(
-      fileName: '$newName$extension',
-      filePath: newFile.path,
-    );
-    objectBox.pdfBox.put(updatedPdf);
-    getPdfDocuments();
     router.pop();
   }
 }

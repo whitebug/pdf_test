@@ -23,6 +23,9 @@ class AppColors {
   /// Low-emphasis text color (e.g. hints, helper text)
   static const Color lowText = Color(0xFF767676);
 
+  /// Grey dot
+  static const Color greyDot = Color(0xFFE8E5E5);
+
   /// Accent color (e.g. buttons, highlights, icons)
   static const Color accent = Color(0xFFFD1524);
 }

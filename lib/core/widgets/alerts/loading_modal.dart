@@ -10,17 +10,22 @@ class LoadingModal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlurredModal(
-      modal: SizedBox.expand(
-        child: Column(
-          children: [
-            SizedSBox(
-              height: 33.82,
-              width: 150,
-              child: Assets.images.logo.image(),
-            ),
-            Text('oneMoment', style: AppText.body).tr(),
-          ],
+    return Material(
+      color: AppColors.filler.withValues(alpha: 0.2),
+      child: BlurredModal(
+        modal: SizedBox.expand(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedSBox(
+                height: 33.82,
+                width: 150,
+                child: Assets.images.logo.image(),
+              ),
+              const SizedSBox(height: 22),
+              Text('oneMoment', style: AppText.body).tr(),
+            ],
+          ),
         ),
       ),
     );

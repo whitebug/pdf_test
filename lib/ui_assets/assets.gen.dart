@@ -18,11 +18,18 @@ class $AssetsImagesGen {
   /// File path: assets/images/cross.png
   AssetGenImage get cross => const AssetGenImage('assets/images/cross.png');
 
+  /// File path: assets/images/cubes.png
+  AssetGenImage get cubes => const AssetGenImage('assets/images/cubes.png');
+
   /// File path: assets/images/doc.png
   AssetGenImage get doc => const AssetGenImage('assets/images/doc.png');
 
   /// File path: assets/images/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
+
+  /// File path: assets/images/main_icon.jpg
+  AssetGenImage get mainIcon =>
+      const AssetGenImage('assets/images/main_icon.jpg');
 
   /// File path: assets/images/nothing.png
   AssetGenImage get nothing => const AssetGenImage('assets/images/nothing.png');
@@ -31,8 +38,20 @@ class $AssetsImagesGen {
   AssetGenImage get nothingS =>
       const AssetGenImage('assets/images/nothing_s.png');
 
+  /// File path: assets/images/onboard1.png
+  AssetGenImage get onboard1 =>
+      const AssetGenImage('assets/images/onboard1.png');
+
+  /// File path: assets/images/onboard2.png
+  AssetGenImage get onboard2 =>
+      const AssetGenImage('assets/images/onboard2.png');
+
   /// File path: assets/images/pen.png
   AssetGenImage get pen => const AssetGenImage('assets/images/pen.png');
+
+  /// File path: assets/images/right_arrow.png
+  AssetGenImage get rightArrow =>
+      const AssetGenImage('assets/images/right_arrow.png');
 
   /// File path: assets/images/scan.png
   AssetGenImage get scan => const AssetGenImage('assets/images/scan.png');
@@ -58,11 +77,16 @@ class $AssetsImagesGen {
   List<AssetGenImage> get values => [
     add,
     cross,
+    cubes,
     doc,
     logo,
+    mainIcon,
     nothing,
     nothingS,
+    onboard1,
+    onboard2,
     pen,
+    rightArrow,
     scan,
     search,
     share,

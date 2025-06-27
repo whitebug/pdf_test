@@ -1,17 +1,16 @@
 import 'dart:async';
-import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:path/path.dart';
 import 'package:pdf_test/core/core.dart';
+import 'package:pdf_test/features/home/home.dart';
 import 'package:pdf_test/features/preview/preview.dart';
 import 'package:pdf_thumbnail/pdf_thumbnail.dart';
-import 'package:pro_image_editor/pro_image_editor.dart';
 
 /// Document preview
 class PdfPreview extends StatefulWidget {
@@ -175,6 +174,32 @@ class _PdfPreviewState extends State<PdfPreview> {
                     ),
                   ),
                 ),
+              BlocListener<PreviewCubit, PreviewState>(
+                listenWhen: (previous, current) =>
+                    previous.isLoading != current.isLoading ||
+                    previous.error != current.error,
+                listener: (context, state) {
+                  final router = GoRouter.of(context);
+                  if (state.isLoading) {
+                    router.push('/loading_modal');
+                  } else {
+                    if (router.canPop()) {
+                      router.pop();
+                    }
+                  }
+                  if (state.error != null) {
+                    HomeUtils.showHomeDialog(
+                      context: context,
+                      title: Text(state.error!, style: AppText.subHeading),
+                      button: Text(
+                        'cancel',
+                        style: AppText.subHeadingInactive,
+                      ).tr(),
+                    );
+                  }
+                },
+                child: const SizedBox.shrink(),
+              ),
             ],
           ),
         ),

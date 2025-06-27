@@ -59,15 +59,17 @@ class PreviewCubit extends Cubit<PreviewState> {
     final doc = await PdfDocument.openFile(pdfPath);
     final page = await doc.getPage(pageIndex + 1);
     final img = await page.render(
-      width: page.width.toInt(),
-      height: page.height.toInt(),
+      width: (page.width * 2).toInt(),
+      height: (page.height * 2).toInt(),
     );
+
     final uiImage = await img.createImageIfNotAvailable();
     final byteData = await uiImage.toByteData(format: ui.ImageByteFormat.png);
     final result = byteData!.buffer.asUint8List();
     await doc.dispose();
     emit(state.copyWith(imageBytes: result));
     final pageImage = await router.push('/pdf_edit', extra: result);
+
     if (pageImage == null) {
       return;
     }
@@ -79,7 +81,7 @@ class PreviewCubit extends Cubit<PreviewState> {
     router.go('/home_page/pdf_preview', extra: pdfPath);
   }
 
-  /// Приклеить все страницы extraPath → в конец mainPath
+  /// Add new pages to the end of a document
   Future<void> appendPdf(String mainPath, String extraPath) async {
     final mainDoc = sfp.PdfDocument(
       inputBytes: await File(mainPath).readAsBytes(),
@@ -108,25 +110,15 @@ class PreviewCubit extends Cubit<PreviewState> {
   Future<void> addPages({
     required String pdfPath,
   }) async {
-    emit(state.copyWith(isLoading: true));
-    try {
-      final scannedPath =
-          await FlutterDocScanner().getScannedDocumentAsPdf(page: pagesToScan)
-              as String?;
-      if (scannedPath == null) {
-        return;
-      }
-      await appendPdf(pdfPath, scannedPath);
-      emit(state.copyWith(isLoading: false));
-      router.go('/home_page/pdf_preview', extra: pdfPath);
-    } on PlatformException {
-      emit(
-        state.copyWith(
-          error: 'failedToGetScannedDocuments'.tr(),
-          isLoading: false,
-        ),
-      );
+    final scannedPath =
+        await FlutterDocScanner().getScannedDocumentAsPdf(page: pagesToScan)
+            as String?;
+    if (scannedPath == null) {
+      return;
     }
+    await appendPdf(pdfPath, scannedPath);
+    emit(state.copyWith(error: null));
+    router.go('/home_page/pdf_preview', extra: pdfPath);
   }
 
   /// Sharing

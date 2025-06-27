@@ -35,6 +35,11 @@ class CodegenLoader extends AssetLoader {
     "save": "Speichern",
     "noFile": "Datei existiert nicht",
     "emptyField": "Dateiname muss eingegeben werden",
+    "continue": "Weiter",
+    "scanOrConvert":
+        "Scannen Sie Dokumente oder konvertieren Sie sie einfach in PDF",
+    "rateUs": "Bewerten Sie uns",
+    "improveFeedback": "Helfen Sie uns mit Ihrem Feedback, uns zu verbessern",
   };
   static const Map<String, dynamic> _ru = {
     "documents": "Документы",
@@ -57,6 +62,11 @@ class CodegenLoader extends AssetLoader {
     "save": "Сохранить",
     "noFile": "Файла не существует",
     "emptyField": "Необходимо ввести имя файла",
+    "continue": "Продолжить",
+    "scanOrConvert":
+        "Сканируйте документы или конвертируйте их в PDF с легкостью",
+    "rateUs": "Оцените нас",
+    "improveFeedback": "Помогите нам стать лучше, оставив отзыв",
   };
   static const Map<String, dynamic> _en = {
     "documents": "Documents",
@@ -77,6 +87,10 @@ class CodegenLoader extends AssetLoader {
     "save": "Save",
     "noFile": "File does not exist",
     "emptyField": "You must enter a file name",
+    "continue": "Continue",
+    "scanOrConvert": "Easily scan documents or convert them to PDF",
+    "rateUs": "Rate Us",
+    "improveFeedback": "Help us improve with your feedback",
   };
   static const Map<String, dynamic> _it = {
     "documents": "Documenti",
@@ -99,6 +113,10 @@ class CodegenLoader extends AssetLoader {
     "save": "Salva",
     "noFile": "Il file non esiste",
     "emptyField": "È necessario inserire un nome file",
+    "continue": "Continua",
+    "scanOrConvert": "Scansiona facilmente i documenti o convertili in PDF",
+    "rateUs": "Valutaci",
+    "improveFeedback": "Aiutaci a migliorare con il tuo feedback",
   };
   static const Map<String, dynamic> _fr = {
     "documents": "Documents",
@@ -121,6 +139,11 @@ class CodegenLoader extends AssetLoader {
     "save": "Enregistrer",
     "noFile": "Le fichier n'existe pas",
     "emptyField": "Vous devez entrer un nom de fichier",
+    "continue": "Continuer",
+    "scanOrConvert":
+        "Scannez facilement des documents ou convertissez-les en PDF",
+    "rateUs": "Évaluez-nous",
+    "improveFeedback": "Aidez-nous à nous améliorer avec vos retours",
   };
   static const Map<String, dynamic> _pt_BR = {
     "documents": "Documentos",
@@ -142,6 +165,10 @@ class CodegenLoader extends AssetLoader {
     "save": "Salvar",
     "noFile": "O arquivo não existe",
     "emptyField": "É necessário inserir um nome de arquivo",
+    "continue": "Continuar",
+    "scanOrConvert": "Digitalize documentos facilmente ou converta-os em PDF",
+    "rateUs": "Avalie-nos",
+    "improveFeedback": "Ajude-nos a melhorar com seu feedback",
   };
   static const Map<String, dynamic> _en_US = {
     "documents": "Documents",
@@ -162,6 +189,10 @@ class CodegenLoader extends AssetLoader {
     "save": "Save",
     "noFile": "File does not exist",
     "emptyField": "You must enter a file name",
+    "continue": "Continue",
+    "scanOrConvert": "Easily scan documents or convert them to PDF",
+    "rateUs": "Rate Us",
+    "improveFeedback": "Help us improve with your feedback",
   };
   static const Map<String, dynamic> _es = {
     "documents": "Documentos",
@@ -183,6 +214,10 @@ class CodegenLoader extends AssetLoader {
     "save": "Guardar",
     "noFile": "El archivo no existe",
     "emptyField": "Debes ingresar un nombre de archivo",
+    "continue": "Continuar",
+    "scanOrConvert": "Escanea fácilmente documentos o conviértelos a PDF",
+    "rateUs": "Califícanos",
+    "improveFeedback": "Ayúdanos a mejorar con tus comentarios",
   };
   static const Map<String, Map<String, dynamic>> mapLocales = {
     "de": _de,
