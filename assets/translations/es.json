@@ -9,5 +9,12 @@
   "filesFetchError": "Error al obtener los archivos",
   "previewName": "Documento",
   "previewPages": "{current} de {overall}",
-  "share": "Compartir"
+  "share": "Compartir",
+  "rename": "Renombrar",
+  "print": "Imprimir",
+  "delete": "Eliminar",
+  "cancel": "Cancelar",
+  "save": "Guardar",
+  "noFile": "El archivo no existe",
+  "emptyField": "Debes ingresar un nombre de archivo"
 }

@@ -9,6 +9,6 @@ abstract class HomeState with _$HomeState {
     @Default([]) List<PdfFileEntity> pdfFilteredList,
     @Default(false) bool isLoading,
     @Default(true) bool isDesc,
-    String? readPdfError,
+    String? error,
   }) = _HomeState;
 }

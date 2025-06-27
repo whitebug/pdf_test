@@ -9,5 +9,12 @@
   "filesFetchError": "Errore durante il recupero dei file",
   "previewName": "Documento",
   "previewPages": "{current} di {overall}",
-  "share": "Condividi"
+  "share": "Condividi",
+  "rename": "Rinomina",
+  "print": "Stampa",
+  "delete": "Elimina",
+  "cancel": "Annulla",
+  "save": "Salva",
+  "noFile": "Il file non esiste",
+  "emptyField": "È necessario inserire un nome file"
 }

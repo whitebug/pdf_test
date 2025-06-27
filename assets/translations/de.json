@@ -9,5 +9,12 @@
   "filesFetchError": "Fehler beim Abrufen der Dateien",
   "previewName": "Dokument",
   "previewPages": "{current} von {overall}",
-  "share": "Teilen"
+  "share": "Teilen",
+  "rename": "Umbenennen",
+  "print": "Drucken",
+  "delete": "Löschen",
+  "cancel": "Abbrechen",
+  "save": "Speichern",
+  "noFile": "Datei existiert nicht",
+  "emptyField": "Dateiname muss eingegeben werden"
 }

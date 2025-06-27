@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:easy_localization/easy_localization.dart';
@@ -41,25 +42,6 @@ class _PdfPreviewState extends State<PdfPreview> {
     fileName = widget.path != null
         ? basename(widget.path!)
         : 'previewName'.tr();
-  }
-
-  Future<Uint8List?> editPage(
-    BuildContext context,
-    Uint8List bytes,
-  ) async {
-    return Navigator.of(context).push(
-      MaterialPageRoute(
-        fullscreenDialog: true,
-        builder: (_) => ProImageEditor.memory(
-          bytes,
-          callbacks: ProImageEditorCallbacks(
-            onImageEditingComplete: (Uint8List edited) async {
-              Navigator.pop(context, edited);
-            },
-          ),
-        ),
-      ),
-    );
   }
 
   @override

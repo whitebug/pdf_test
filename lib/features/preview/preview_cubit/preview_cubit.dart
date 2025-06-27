@@ -11,6 +11,7 @@ import 'package:injectable/injectable.dart';
 import 'package:pdf_render/pdf_render.dart';
 import 'package:pdf_test/core/router.dart';
 import 'package:pdf_test/features/home/home_cubit/home_cubit.dart';
+import 'package:printing/printing.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart' as sfp;
 
@@ -58,8 +59,8 @@ class PreviewCubit extends Cubit<PreviewState> {
     final doc = await PdfDocument.openFile(pdfPath);
     final page = await doc.getPage(pageIndex + 1);
     final img = await page.render(
-      width: (page.width * 2).toInt(),
-      height: (page.height * 2).toInt(),
+      width: page.width.toInt(),
+      height: page.height.toInt(),
     );
     final uiImage = await img.createImageIfNotAvailable();
     final byteData = await uiImage.toByteData(format: ui.ImageByteFormat.png);
@@ -135,5 +136,16 @@ class PreviewCubit extends Cubit<PreviewState> {
     }
     final params = ShareParams(files: [XFile(pdfPath)]);
     SharePlus.instance.share(params);
+    router.pop();
+  }
+
+  /// Print
+  Future<void> printPdfFile(String pdfPath) async {
+    final bytes = await File(pdfPath).readAsBytes();
+    await Printing.layoutPdf(
+      name: pdfPath.split('/').last,
+      onLayout: (_) async => bytes,
+    );
+    router.pop();
   }
 }

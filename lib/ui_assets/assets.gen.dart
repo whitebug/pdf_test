@@ -73,8 +73,8 @@ class $AssetsTranslationsGen {
   /// File path: assets/translations/fr.json
   String get fr => 'assets/translations/fr.json';
 
-  /// File path: assets/translations/ge.json
-  String get ge => 'assets/translations/ge.json';
+  /// File path: assets/translations/de.json
+  String get ge => 'assets/translations/de.json';
 
   /// File path: assets/translations/it.json
   String get it => 'assets/translations/it.json';

@@ -105,7 +105,8 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                         ),
-                      HomeList(fileList: state.pdfFilteredList),
+                      if (state.pdfList.isNotEmpty)
+                        HomeList(fileList: state.pdfFilteredList),
                       const SizedSliver(height: 100),
                     ],
                   ),

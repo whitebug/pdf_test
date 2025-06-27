@@ -9,5 +9,12 @@
   "filesFetchError": "Erro ao buscar os arquivos",
   "previewName": "Documento",
   "previewPages": "{current} de {overall}",
-  "share": "Compartilhar"
+  "share": "Compartilhar",
+  "rename": "Renomear",
+  "print": "Imprimir",
+  "delete": "Excluir",
+  "cancel": "Cancelar",
+  "save": "Salvar",
+  "noFile": "O arquivo não existe",
+  "emptyField": "É necessário inserir um nome de arquivo"
 }

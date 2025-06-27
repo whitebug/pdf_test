@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$HomeState {
 
- List<PdfFileEntity> get pdfList; List<PdfFileEntity> get pdfFilteredList; bool get isLoading; bool get isDesc; String? get readPdfError;
+ List<PdfFileEntity> get pdfList; List<PdfFileEntity> get pdfFilteredList; bool get isLoading; bool get isDesc; String? get error;
 /// Create a copy of HomeState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -26,16 +26,16 @@ $HomeStateCopyWith<HomeState> get copyWith => _$HomeStateCopyWithImpl<HomeState>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeState&&const DeepCollectionEquality().equals(other.pdfList, pdfList)&&const DeepCollectionEquality().equals(other.pdfFilteredList, pdfFilteredList)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isDesc, isDesc) || other.isDesc == isDesc)&&(identical(other.readPdfError, readPdfError) || other.readPdfError == readPdfError));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeState&&const DeepCollectionEquality().equals(other.pdfList, pdfList)&&const DeepCollectionEquality().equals(other.pdfFilteredList, pdfFilteredList)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isDesc, isDesc) || other.isDesc == isDesc)&&(identical(other.error, error) || other.error == error));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(pdfList),const DeepCollectionEquality().hash(pdfFilteredList),isLoading,isDesc,readPdfError);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(pdfList),const DeepCollectionEquality().hash(pdfFilteredList),isLoading,isDesc,error);
 
 @override
 String toString() {
-  return 'HomeState(pdfList: $pdfList, pdfFilteredList: $pdfFilteredList, isLoading: $isLoading, isDesc: $isDesc, readPdfError: $readPdfError)';
+  return 'HomeState(pdfList: $pdfList, pdfFilteredList: $pdfFilteredList, isLoading: $isLoading, isDesc: $isDesc, error: $error)';
 }
 
 
@@ -46,7 +46,7 @@ abstract mixin class $HomeStateCopyWith<$Res>  {
   factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) _then) = _$HomeStateCopyWithImpl;
 @useResult
 $Res call({
- List<PdfFileEntity> pdfList, List<PdfFileEntity> pdfFilteredList, bool isLoading, bool isDesc, String? readPdfError
+ List<PdfFileEntity> pdfList, List<PdfFileEntity> pdfFilteredList, bool isLoading, bool isDesc, String? error
 });
 
 
@@ -63,13 +63,13 @@ class _$HomeStateCopyWithImpl<$Res>
 
 /// Create a copy of HomeState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? pdfList = null,Object? pdfFilteredList = null,Object? isLoading = null,Object? isDesc = null,Object? readPdfError = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? pdfList = null,Object? pdfFilteredList = null,Object? isLoading = null,Object? isDesc = null,Object? error = freezed,}) {
   return _then(_self.copyWith(
 pdfList: null == pdfList ? _self.pdfList : pdfList // ignore: cast_nullable_to_non_nullable
 as List<PdfFileEntity>,pdfFilteredList: null == pdfFilteredList ? _self.pdfFilteredList : pdfFilteredList // ignore: cast_nullable_to_non_nullable
 as List<PdfFileEntity>,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,isDesc: null == isDesc ? _self.isDesc : isDesc // ignore: cast_nullable_to_non_nullable
-as bool,readPdfError: freezed == readPdfError ? _self.readPdfError : readPdfError // ignore: cast_nullable_to_non_nullable
+as bool,error: freezed == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -81,7 +81,7 @@ as String?,
 
 
 class _HomeState implements HomeState {
-  const _HomeState({final  List<PdfFileEntity> pdfList = const [], final  List<PdfFileEntity> pdfFilteredList = const [], this.isLoading = false, this.isDesc = true, this.readPdfError}): _pdfList = pdfList,_pdfFilteredList = pdfFilteredList;
+  const _HomeState({final  List<PdfFileEntity> pdfList = const [], final  List<PdfFileEntity> pdfFilteredList = const [], this.isLoading = false, this.isDesc = true, this.error}): _pdfList = pdfList,_pdfFilteredList = pdfFilteredList;
   
 
  final  List<PdfFileEntity> _pdfList;
@@ -100,7 +100,7 @@ class _HomeState implements HomeState {
 
 @override@JsonKey() final  bool isLoading;
 @override@JsonKey() final  bool isDesc;
-@override final  String? readPdfError;
+@override final  String? error;
 
 /// Create a copy of HomeState
 /// with the given fields replaced by the non-null parameter values.
@@ -112,16 +112,16 @@ _$HomeStateCopyWith<_HomeState> get copyWith => __$HomeStateCopyWithImpl<_HomeSt
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HomeState&&const DeepCollectionEquality().equals(other._pdfList, _pdfList)&&const DeepCollectionEquality().equals(other._pdfFilteredList, _pdfFilteredList)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isDesc, isDesc) || other.isDesc == isDesc)&&(identical(other.readPdfError, readPdfError) || other.readPdfError == readPdfError));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HomeState&&const DeepCollectionEquality().equals(other._pdfList, _pdfList)&&const DeepCollectionEquality().equals(other._pdfFilteredList, _pdfFilteredList)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isDesc, isDesc) || other.isDesc == isDesc)&&(identical(other.error, error) || other.error == error));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_pdfList),const DeepCollectionEquality().hash(_pdfFilteredList),isLoading,isDesc,readPdfError);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_pdfList),const DeepCollectionEquality().hash(_pdfFilteredList),isLoading,isDesc,error);
 
 @override
 String toString() {
-  return 'HomeState.state(pdfList: $pdfList, pdfFilteredList: $pdfFilteredList, isLoading: $isLoading, isDesc: $isDesc, readPdfError: $readPdfError)';
+  return 'HomeState.state(pdfList: $pdfList, pdfFilteredList: $pdfFilteredList, isLoading: $isLoading, isDesc: $isDesc, error: $error)';
 }
 
 
@@ -132,7 +132,7 @@ abstract mixin class _$HomeStateCopyWith<$Res> implements $HomeStateCopyWith<$Re
   factory _$HomeStateCopyWith(_HomeState value, $Res Function(_HomeState) _then) = __$HomeStateCopyWithImpl;
 @override @useResult
 $Res call({
- List<PdfFileEntity> pdfList, List<PdfFileEntity> pdfFilteredList, bool isLoading, bool isDesc, String? readPdfError
+ List<PdfFileEntity> pdfList, List<PdfFileEntity> pdfFilteredList, bool isLoading, bool isDesc, String? error
 });
 
 
@@ -149,13 +149,13 @@ class __$HomeStateCopyWithImpl<$Res>
 
 /// Create a copy of HomeState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? pdfList = null,Object? pdfFilteredList = null,Object? isLoading = null,Object? isDesc = null,Object? readPdfError = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? pdfList = null,Object? pdfFilteredList = null,Object? isLoading = null,Object? isDesc = null,Object? error = freezed,}) {
   return _then(_HomeState(
 pdfList: null == pdfList ? _self._pdfList : pdfList // ignore: cast_nullable_to_non_nullable
 as List<PdfFileEntity>,pdfFilteredList: null == pdfFilteredList ? _self._pdfFilteredList : pdfFilteredList // ignore: cast_nullable_to_non_nullable
 as List<PdfFileEntity>,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,isDesc: null == isDesc ? _self.isDesc : isDesc // ignore: cast_nullable_to_non_nullable
-as bool,readPdfError: freezed == readPdfError ? _self.readPdfError : readPdfError // ignore: cast_nullable_to_non_nullable
+as bool,error: freezed == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }

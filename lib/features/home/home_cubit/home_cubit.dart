@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/services.dart';
@@ -6,7 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_doc_scanner/flutter_doc_scanner.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:path/path.dart';
+import 'package:path/path.dart' as p;
+import 'package:path_provider/path_provider.dart';
 import 'package:pdf_test/core/core.dart';
 
 part 'home_cubit.freezed.dart';
@@ -31,7 +33,7 @@ class HomeCubit extends Cubit<HomeState> {
         state.copyWith(
           pdfList: pdfs,
           pdfFilteredList: pdfs,
-          readPdfError: null,
+          error: null,
           isLoading: false,
         ),
       );
@@ -39,41 +41,46 @@ class HomeCubit extends Cubit<HomeState> {
       emit(
         state.copyWith(
           isLoading: false,
-          readPdfError: 'filesFetchError'.tr(),
+          error: 'filesFetchError'.tr(),
         ),
       );
     }
   }
 
-  /// Scan document
+  /// Scan
   Future<void> scanDocument() async {
     emit(state.copyWith(isLoading: true));
-    dynamic scannedDocuments;
     try {
-      scannedDocuments = await FlutterDocScanner().getScannedDocumentAsPdf(
-        page: pagesToScan,
-      );
-      if (scannedDocuments == null) {
+      final tempPath =
+          await FlutterDocScanner().getScannedDocumentAsPdf(page: pagesToScan)
+              as String?;
+      if (tempPath == null) {
         emit(
           state.copyWith(
-            readPdfError: 'unknownPlatformDocuments'.tr(),
+            error: 'unknownPlatformDocuments'.tr(),
             isLoading: false,
           ),
         );
+        return;
       }
-      final filePath = scannedDocuments as String;
-      final fileName = basename(filePath);
-      final pdf = PdfFileEntity(
-        fileName: fileName,
-        filePath: filePath,
-        dateTime: DateTime.now(),
+      final fileName = p.basename(tempPath);
+      final docsDir = await getApplicationDocumentsDirectory();
+      final permDir = Directory(p.join(docsDir.path, 'scans'));
+      await permDir.create(recursive: true);
+      final permPath = p.join(permDir.path, fileName);
+      final savedFile = await File(tempPath).rename(permPath);
+      objectBox.pdfBox.put(
+        PdfFileEntity(
+          fileName: fileName,
+          filePath: savedFile.path,
+          dateTime: DateTime.now(),
+        ),
       );
-      objectBox.pdfBox.put(pdf);
       getPdfDocuments();
     } on PlatformException {
       emit(
         state.copyWith(
-          readPdfError: 'failedToGetScannedDocuments'.tr(),
+          error: 'failedToGetScannedDocuments'.tr(),
           isLoading: false,
         ),
       );
@@ -106,5 +113,78 @@ class HomeCubit extends Cubit<HomeState> {
       return pdf.fileName.toLowerCase().contains(query);
     }).toList();
     emit(state.copyWith(pdfFilteredList: filtered));
+  }
+
+  /// Delete document
+  Future<void> deleteDocument(PdfFileEntity doc) async {
+    emit(state.copyWith(isLoading: true));
+    try {
+      final file = File(doc.filePath);
+      if (file.existsSync()) {
+        await file.delete();
+      }
+      objectBox.pdfBox.remove(doc.id);
+      getPdfDocuments();
+    } on FileSystemException catch (e) {
+      emit(
+        state.copyWith(
+          error: 'fileSystemError'.tr(args: [e.message]),
+          isLoading: false,
+        ),
+      );
+    } on Object catch (e, _) {
+      emit(
+        state.copyWith(
+          error: 'failedToDeleteDocument'.tr(args: [doc.fileName]),
+          isLoading: false,
+        ),
+      );
+    }
+    router.pop();
+  }
+
+  /// Rename file
+  Future<void> renameDocument({
+    required PdfFileEntity pdf,
+    required String? newName,
+  }) async {
+    final oldFile = File(pdf.filePath);
+    if (!oldFile.existsSync()) {
+      emit(state.copyWith(error: 'noFile'.tr()));
+      return;
+    }
+    if (!oldFile.existsSync() || newName == null) {
+      emit(state.copyWith(error: 'emptyField'.tr()));
+      return;
+    }
+    final dir = oldFile.parent.path;
+    final extension = p.extension(pdf.filePath);
+    final newFilePath = p.join(dir, '$newName$extension');
+    final newFile = await oldFile.rename(newFilePath);
+    final updatedPdf = pdf.copyWith(
+      fileName: '$newName$extension',
+      filePath: newFile.path,
+    );
+    objectBox.pdfBox.put(updatedPdf);
+    getPdfDocuments();
+    router.pop();
+  }
+}
+
+/// Copy with
+extension PdfFileEntityCopyWith on PdfFileEntity {
+  /// method
+  PdfFileEntity copyWith({
+    int? id,
+    String? fileName,
+    String? filePath,
+    DateTime? dateTime,
+  }) {
+    return PdfFileEntity(
+      id: id ?? this.id,
+      fileName: fileName ?? this.fileName,
+      filePath: filePath ?? this.filePath,
+      dateTime: dateTime ?? this.dateTime,
+    );
   }
 }

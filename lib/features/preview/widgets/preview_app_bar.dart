@@ -11,7 +11,7 @@ import 'package:pdf_test/ui_assets/assets.gen.dart';
 class PreviewAppBar extends StatelessWidget {
   /// Init
   const PreviewAppBar({
-    required this.fileName,
+    this.fileName,
     this.path,
     this.currentPage,
     this.overallPages,
@@ -19,7 +19,7 @@ class PreviewAppBar extends StatelessWidget {
   });
 
   /// Name
-  final String fileName;
+  final String? fileName;
 
   /// File path
   final String? path;
@@ -53,15 +53,16 @@ class PreviewAppBar extends StatelessWidget {
             icon: const Icon(Icons.arrow_back, color: AppColors.text),
             onPressed: () => context.pop(),
           ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width / 4,
-            child: Text(
-              fileName,
-              style: AppText.body,
-              overflow: TextOverflow.ellipsis,
-              maxLines: 1,
+          if (fileName != null)
+            SizedBox(
+              width: MediaQuery.of(context).size.width / 4,
+              child: Text(
+                fileName!,
+                style: AppText.body,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+              ),
             ),
-          ),
           const SizedBox(width: 8),
           Text(
             '|',

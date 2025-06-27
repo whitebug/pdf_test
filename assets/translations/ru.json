@@ -9,5 +9,12 @@
   "filesFetchError": "Ошибка получения файлов",
   "previewName": "Документ",
   "previewPages": "{current} из {overall}",
-  "share": "Поделиться"
+  "share": "Поделиться",
+  "rename": "Переименовать",
+  "print": "Печать",
+  "delete": "Удалить",
+  "cancel": "Отмена",
+  "save": "Сохранить",
+  "noFile": "Файла не существует",
+  "emptyField": "Необходимо ввести имя файла"
 }

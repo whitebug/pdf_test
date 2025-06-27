@@ -14,7 +14,7 @@ class CodegenLoader extends AssetLoader {
     return Future.value(mapLocales[locale.toString()]);
   }
 
-  static const Map<String, dynamic> _ge = {
+  static const Map<String, dynamic> _de = {
     "documents": "Dokumente",
     "noDocumentsFound": "Keine Dokumente gefunden",
     "tapToScan":
@@ -28,6 +28,13 @@ class CodegenLoader extends AssetLoader {
     "previewName": "Dokument",
     "previewPages": "{current} von {overall}",
     "share": "Teilen",
+    "rename": "Umbenennen",
+    "print": "Drucken",
+    "delete": "Löschen",
+    "cancel": "Abbrechen",
+    "save": "Speichern",
+    "noFile": "Datei existiert nicht",
+    "emptyField": "Dateiname muss eingegeben werden",
   };
   static const Map<String, dynamic> _ru = {
     "documents": "Документы",
@@ -43,6 +50,13 @@ class CodegenLoader extends AssetLoader {
     "previewName": "Документ",
     "previewPages": "{current} из {overall}",
     "share": "Поделиться",
+    "rename": "Переименовать",
+    "print": "Печать",
+    "delete": "Удалить",
+    "cancel": "Отмена",
+    "save": "Сохранить",
+    "noFile": "Файла не существует",
+    "emptyField": "Необходимо ввести имя файла",
   };
   static const Map<String, dynamic> _en = {
     "documents": "Documents",
@@ -56,6 +70,13 @@ class CodegenLoader extends AssetLoader {
     "previewName": "Document",
     "previewPages": "{current} of {overall}",
     "share": "Share",
+    "rename": "Rename",
+    "print": "Print",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "save": "Save",
+    "noFile": "File does not exist",
+    "emptyField": "You must enter a file name",
   };
   static const Map<String, dynamic> _it = {
     "documents": "Documenti",
@@ -71,6 +92,13 @@ class CodegenLoader extends AssetLoader {
     "previewName": "Documento",
     "previewPages": "{current} di {overall}",
     "share": "Condividi",
+    "rename": "Rinomina",
+    "print": "Stampa",
+    "delete": "Elimina",
+    "cancel": "Annulla",
+    "save": "Salva",
+    "noFile": "Il file non esiste",
+    "emptyField": "È necessario inserire un nome file",
   };
   static const Map<String, dynamic> _fr = {
     "documents": "Documents",
@@ -86,6 +114,13 @@ class CodegenLoader extends AssetLoader {
     "previewName": "Document",
     "previewPages": "{current} sur {overall}",
     "share": "Partager",
+    "rename": "Renommer",
+    "print": "Imprimer",
+    "delete": "Supprimer",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "noFile": "Le fichier n'existe pas",
+    "emptyField": "Vous devez entrer un nom de fichier",
   };
   static const Map<String, dynamic> _pt_BR = {
     "documents": "Documentos",
@@ -100,6 +135,13 @@ class CodegenLoader extends AssetLoader {
     "previewName": "Documento",
     "previewPages": "{current} de {overall}",
     "share": "Compartilhar",
+    "rename": "Renomear",
+    "print": "Imprimir",
+    "delete": "Excluir",
+    "cancel": "Cancelar",
+    "save": "Salvar",
+    "noFile": "O arquivo não existe",
+    "emptyField": "É necessário inserir um nome de arquivo",
   };
   static const Map<String, dynamic> _en_US = {
     "documents": "Documents",
@@ -113,6 +155,13 @@ class CodegenLoader extends AssetLoader {
     "previewName": "Document",
     "previewPages": "{current} of {overall}",
     "share": "Share",
+    "rename": "Rename",
+    "print": "Print",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "save": "Save",
+    "noFile": "File does not exist",
+    "emptyField": "You must enter a file name",
   };
   static const Map<String, dynamic> _es = {
     "documents": "Documentos",
@@ -127,9 +176,16 @@ class CodegenLoader extends AssetLoader {
     "previewName": "Documento",
     "previewPages": "{current} de {overall}",
     "share": "Compartir",
+    "rename": "Renombrar",
+    "print": "Imprimir",
+    "delete": "Eliminar",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "noFile": "El archivo no existe",
+    "emptyField": "Debes ingresar un nombre de archivo",
   };
   static const Map<String, Map<String, dynamic>> mapLocales = {
-    "ge": _ge,
+    "de": _de,
     "ru": _ru,
     "en": _en,
     "it": _it,

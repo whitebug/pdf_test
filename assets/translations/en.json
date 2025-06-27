@@ -9,5 +9,12 @@
   "filesFetchError": "Files fetch error",
   "previewName": "Document",
   "previewPages": "{current} of {overall}",
-  "share": "Share"
+  "share": "Share",
+  "rename": "Rename",
+  "print": "Print",
+  "delete": "Delete",
+  "cancel": "Cancel",
+  "save": "Save",
+  "noFile": "File does not exist",
+  "emptyField": "You must enter a file name"
 }
