@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pdf_test/core/core.dart';
@@ -42,12 +43,12 @@ class PreviewActionBar extends StatelessWidget {
           children: [
             ActionTile(
               icon: Assets.images.pen.image(width: 30.w, height: 30.w),
-              label: 'Edit',
+              label: 'edit'.tr(),
               onTap: onEdit,
             ),
             ActionTile(
               icon: Assets.images.add.image(width: 30.w, height: 30.w),
-              label: 'Add',
+              label: 'add'.tr(),
               onTap: onAdd,
             ),
           ],

@@ -40,6 +40,8 @@ class CodegenLoader extends AssetLoader {
         "Scannen Sie Dokumente oder konvertieren Sie sie einfach in PDF",
     "rateUs": "Bewerten Sie uns",
     "improveFeedback": "Helfen Sie uns mit Ihrem Feedback, uns zu verbessern",
+    "add": "Hinzufügen",
+    "edit": "Bearbeiten",
   };
   static const Map<String, dynamic> _ru = {
     "documents": "Документы",
@@ -67,6 +69,8 @@ class CodegenLoader extends AssetLoader {
         "Сканируйте документы или конвертируйте их в PDF с легкостью",
     "rateUs": "Оцените нас",
     "improveFeedback": "Помогите нам стать лучше, оставив отзыв",
+    "add": "Добавить",
+    "edit": "Редактировать",
   };
   static const Map<String, dynamic> _en = {
     "documents": "Documents",
@@ -91,6 +95,8 @@ class CodegenLoader extends AssetLoader {
     "scanOrConvert": "Easily scan documents or convert them to PDF",
     "rateUs": "Rate Us",
     "improveFeedback": "Help us improve with your feedback",
+    "add": "Add",
+    "edit": "Edit",
   };
   static const Map<String, dynamic> _it = {
     "documents": "Documenti",
@@ -117,6 +123,8 @@ class CodegenLoader extends AssetLoader {
     "scanOrConvert": "Scansiona facilmente i documenti o convertili in PDF",
     "rateUs": "Valutaci",
     "improveFeedback": "Aiutaci a migliorare con il tuo feedback",
+    "add": "Aggiungi",
+    "edit": "Modifica",
   };
   static const Map<String, dynamic> _fr = {
     "documents": "Documents",
@@ -144,6 +152,8 @@ class CodegenLoader extends AssetLoader {
         "Scannez facilement des documents ou convertissez-les en PDF",
     "rateUs": "Évaluez-nous",
     "improveFeedback": "Aidez-nous à nous améliorer avec vos retours",
+    "add": "Ajouter",
+    "edit": "Modifier",
   };
   static const Map<String, dynamic> _pt_BR = {
     "documents": "Documentos",
@@ -169,6 +179,8 @@ class CodegenLoader extends AssetLoader {
     "scanOrConvert": "Digitalize documentos facilmente ou converta-os em PDF",
     "rateUs": "Avalie-nos",
     "improveFeedback": "Ajude-nos a melhorar com seu feedback",
+    "add": "Adicionar",
+    "edit": "Editar",
   };
   static const Map<String, dynamic> _en_US = {
     "documents": "Documents",
@@ -193,6 +205,8 @@ class CodegenLoader extends AssetLoader {
     "scanOrConvert": "Easily scan documents or convert them to PDF",
     "rateUs": "Rate Us",
     "improveFeedback": "Help us improve with your feedback",
+    "add": "Add",
+    "edit": "Edit",
   };
   static const Map<String, dynamic> _es = {
     "documents": "Documentos",
@@ -218,6 +232,8 @@ class CodegenLoader extends AssetLoader {
     "scanOrConvert": "Escanea fácilmente documentos o conviértelos a PDF",
     "rateUs": "Califícanos",
     "improveFeedback": "Ayúdanos a mejorar con tus comentarios",
+    "add": "Agregar",
+    "edit": "Editar",
   };
   static const Map<String, Map<String, dynamic>> mapLocales = {
     "de": _de,
